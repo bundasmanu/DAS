@@ -5,15 +5,20 @@
  */
 package logicadigital.tp;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+
 /**
  *
  * @author carlo
  */
 public class main {
-    public static void main(String[]args){
+    public static void main(String[]args) throws ClassNotFoundException, SQLException{
         System.out.println("Ola mundo");
         System.out.println("oi");
         System.out.println("ok zes");System.out.println("ola");
-        int num=1;
+        Fachada fac=new Fachada();
+        fac.getSessao().getUtilizdorOperacaoCRUD().intw();
+        
     }
 }
