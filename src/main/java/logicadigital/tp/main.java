@@ -18,7 +18,7 @@ public class main {
         System.out.println("oi");
         System.out.println("ok zes");System.out.println("ola");
         Fachada fac=new Fachada();
-        fac.getSessao().getUtilizdorOperacaoCRUD().intw();
+        fac.getSessao().getUtilizdorOperacaoCRUD().intw(); 
         
     }
 }
