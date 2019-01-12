@@ -22,7 +22,7 @@ public class Session {
     private CRUDUtilizador utilizadorBD=null;
     
     public Session(){
-        
+         
     }
     
     public static Connection getConnection() throws ClassNotFoundException, SQLException{
