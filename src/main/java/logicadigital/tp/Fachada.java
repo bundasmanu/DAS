@@ -16,10 +16,10 @@ import java.sql.Statement;
  */
 public class Fachada {
     
-    private Session sessao=null;
+    private Jogo j;
     
     public Fachada(){
-        
+        this.j=new Jogo();
     }
     
     public Fachada getFachada(){
@@ -30,14 +30,9 @@ public class Fachada {
         
         return this;
     }
-    
-    public Session getSessao(){
-        
-        if(sessao==null){
-            return new Session();
-        }
-        
-        return sessao;
+  
+    public Jogo getJogo(){
+        return this.j;
     }
     
 }

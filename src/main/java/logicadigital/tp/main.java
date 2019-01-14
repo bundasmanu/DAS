@@ -17,8 +17,9 @@ public class main {
         System.out.println("Ola mundo");
         System.out.println("oi");
         System.out.println("ok zes");System.out.println("ola");
-        Fachada fac=new Fachada();
-        fac.getSessao().getUtilizdorOperacaoCRUD().intw(); 
         
+        /*CHAMADA AO MENU PRINCIPAL*/
+        MenuInicial m= new MenuInicial();   
+        m.setVisible(true);
     }
 }
