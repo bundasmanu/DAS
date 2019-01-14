@@ -16,10 +16,10 @@ import java.sql.Statement;
  */
 public class Fachada {
     
-    private Session sessao=null;
-    
+    private Session sessao;
+    CRUDUtilizador crudutilizador;
     public Fachada(){
-        
+        crudutilizador= new CRUDUtilizador();
     }
     
     public Fachada getFachada(){
@@ -29,6 +29,16 @@ public class Fachada {
         }
         
         return this;
+    }
+    
+      public Fachada(String tipo_crud_a_efetuar){
+        
+        if(tipo_crud_a_efetuar.equals("CRUDUtilizador")){
+            this.crudutilizador= new CRUDUtilizador();
+        }
+        else{
+            System.out.println("ok");
+        }
     }
     
     public Session getSessao(){
