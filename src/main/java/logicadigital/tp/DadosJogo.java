@@ -12,8 +12,6 @@ package logicadigital.tp;
 public class DadosJogo {
     
     private Session sessao=null;
-    /*LOGICA DO JOGO CHAMADA AQUI*/
-    private CRUDUtilizador crudUtil;
     
     public DadosJogo(){
         
@@ -26,14 +24,6 @@ public class DadosJogo {
         }
         
         return sessao;
-    }
-    
-    public CRUDUtilizador getCRUDUtil(){
-        if(this.crudUtil==null){
-            return crudUtil=new CRUDUtilizador();
-        }
-        
-        return crudUtil;
     }
     
 }

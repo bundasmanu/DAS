@@ -81,6 +81,7 @@ public class MenuInicial extends javax.swing.JFrame {
     private void btnRegistoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistoActionPerformed
         // TODO add your handling code here:
         fac.getJogo().aplica_registo();
+        fac.getJogo().registo("Joao", "Antonio");
         JLabel lab1 = new JLabel(fac.getJogo().toString(), JLabel.LEFT);
         setLayout(new FlowLayout()); 
         add(lab1);

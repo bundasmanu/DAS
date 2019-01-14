@@ -5,8 +5,10 @@
  */
 package logicadigital.tp;
 
+import static java.lang.System.exit;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Scanner;
 
 /**
  *

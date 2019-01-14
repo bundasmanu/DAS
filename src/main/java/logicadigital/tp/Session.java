@@ -10,47 +10,48 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-
 /**
  *
  * @author Armando
  */
 public class Session {
-    
-    protected static Connection conn = null;
+
+    public static Connection conn;
     //private static UnitOfWork unit;
-    private CRUDUtilizador utilizadorBD=null;
-    
-    public Session(){
-         
+    public static CRUDUtilizador utilizadorBD;
+
+    public Session() {
+
     }
-    
-    public static Connection getConnection() throws ClassNotFoundException, SQLException{
-        if(conn==null){
+
+    public static Connection getConnection() throws ClassNotFoundException, SQLException {
+        if (conn == null) {
             Class.forName("org.h2.Driver");
             conn = DriverManager.
-            getConnection("jdbc:h2:~/test", "sa", ""); //user:sa pass:""
-            Statement statement = conn.createStatement();
-            statement.setQueryTimeout(30);
+                    getConnection("jdbc:h2:~/test", "sa", ""); //user:sa pass:""
+            //Statement statement = conn.createStatement();
+            //statement.setQueryTimeout(30);
         }
-        
+
         return conn;
     }
-    
-    public void fechaConexao() throws SQLException{
-        if(this.conn.isClosed()==true){
+
+    public void fechaConexao() throws SQLException {
+        if (this.conn.isClosed() == true) {
             return;
         }
         this.conn.close();
     }
-    
-    public CRUDUtilizador getUtilizdorOperacaoCRUD(){
+
+    public static CRUDUtilizador getUtilizdorOperacaoCRUD() throws ClassNotFoundException, SQLException {
         
-        if(this.utilizadorBD==null){
-            return this.utilizadorBD=new CRUDUtilizador();
+        if (utilizadorBD == null) {
+            return utilizadorBD = new CRUDUtilizador();
         }
-        
+
         return utilizadorBD;
     }
+    
+    
     
 }
