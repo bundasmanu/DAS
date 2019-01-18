@@ -123,9 +123,11 @@ public class MenuInicial extends javax.swing.JFrame {
     private void btnRegistoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistoActionPerformed
         // TODO add your handling code here:
         //com isto funciona bem e aparece o dialog a dizer "Novo utilizador adicionado"
-        fac.getJogo().aplica_registo();
-        fac.getJogo().registo("pedrop","pp");
-//        RegisterForm register_form= new RegisterForm();
+        //fac.getJogo().aplica_registo();
+        //fac.getJogo().registo("pedrop","pp");
+        this.setVisible(false);
+        new RegisterForm2().setVisible(true);
+        this.dispose();
 //         register_form.setLayout(new FlowLayout());
 //        register_form.setVisible(true);
 //        add(register_form);
