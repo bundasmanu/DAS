@@ -15,17 +15,30 @@ import java.util.Scanner;
  * @author carlo
  */
 public class main {
-    public static void main(String[]args) throws ClassNotFoundException, SQLException{
+
+    public static void main(String[] args) throws ClassNotFoundException, SQLException {
         System.out.println("Ola mundo");
         System.out.println("oi");
-        System.out.println("ok zes");System.out.println("ola");
-        
+        System.out.println("ok zes");
+        System.out.println("ola");
+
+        /*TESTE A UM MODULO*/
+        Modulo x = new Modulo();
+        Input x1 = new Input();
+        Input x2 = new Input();
+        Operador w = new Operador();
+        x.getInputs().add(x1);
+        x.getInputs().add(x2);
+        x.getOperador().add(w);
+        Output out = new Output();
+        x.getOutputs().add(out);
+        w.getOutputs().add(out);
+        w.getInputs().add(x1);
+        w.getInputs().add(x2);
+        System.out.println(x.toString());
         /*CHAMADA AO MENU PRINCIPAL*/
-        MenuInicial m= new MenuInicial();   
-        m.setVisible(true);
-        
-//        /*chamada ao form do registo do user*/
-//        RegisterForm f= new RegisterForm();
-//        f.setVisible(true);
+ /*MenuInicial m= new MenuInicial();   
+        m.setVisible(true);*/
+
     }
 }

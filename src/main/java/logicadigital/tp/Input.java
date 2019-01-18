@@ -5,27 +5,25 @@
  */
 package logicadigital.tp;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Armando
  */
-public class DadosJogo {
+public class Input {
     
-    private Session sessao=null;
     
-    public DadosJogo(){
+    public Input(){
         
     }
     
-    
-    
-    public Session getSessao(){
+    @Override
+    public String toString(){
         
-        if(sessao==null){
-            return sessao=new Session();
-        }
+        return "\nInput\n";
         
-        return sessao;
     }
     
 }

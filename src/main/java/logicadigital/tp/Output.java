@@ -9,23 +9,17 @@ package logicadigital.tp;
  *
  * @author Armando
  */
-public class DadosJogo {
+public class Output {
     
-    private Session sessao=null;
-    
-    public DadosJogo(){
+    public Output(){
         
     }
     
-    
-    
-    public Session getSessao(){
+    @Override
+    public String toString(){
         
-        if(sessao==null){
-            return sessao=new Session();
-        }
+        return "\nOutput\n";
         
-        return sessao;
     }
     
 }
