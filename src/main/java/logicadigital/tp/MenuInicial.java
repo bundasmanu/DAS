@@ -5,8 +5,15 @@
  */
 package logicadigital.tp;
 
+import java.awt.BorderLayout;
+import java.awt.Dialog;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
+import javax.swing.BoxLayout;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  *
@@ -17,13 +24,12 @@ public class MenuInicial extends javax.swing.JFrame {
     /**
      * Creates new form MenuInicial
      */
-    
     /*VARIAVEL FACHADA GLOBAL*/
     Fachada fac;
-    
+
     public MenuInicial() {
         initComponents();
-        fac=new Fachada();
+        fac = new Fachada();
     }
 
     /**
@@ -35,8 +41,44 @@ public class MenuInicial extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
         btnRegisto = new java.awt.Button();
         btnLogin = new java.awt.Button();
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,7 +114,7 @@ public class MenuInicial extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnRegisto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(150, Short.MAX_VALUE))
+                .addContainerGap(147, Short.MAX_VALUE))
         );
 
         pack();
@@ -80,11 +122,25 @@ public class MenuInicial extends javax.swing.JFrame {
 
     private void btnRegistoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistoActionPerformed
         // TODO add your handling code here:
+        //com isto funciona bem e aparece o dialog a dizer "Novo utilizador adicionado"
         fac.getJogo().aplica_registo();
-        fac.getJogo().registo("Joao", "Antonio");
-        JLabel lab1 = new JLabel(fac.getJogo().toString(), JLabel.LEFT);
-        setLayout(new FlowLayout()); 
-        add(lab1);
+        fac.getJogo().registo("pedrop","pp");
+//        RegisterForm register_form= new RegisterForm();
+//         register_form.setLayout(new FlowLayout());
+//        register_form.setVisible(true);
+//        add(register_form);
+
+        //new RegisterForm().setVisible(true);
+        //fac.getJogo().aplica_registo();
+        //fac.getJogo().registo("Joao", "Antonio");
+        //JLabel lab1 = new JLabel(fac.getJogo().toString(), JLabel.LEFT);
+        //setLayout(new FlowLayout()); 
+        //add(lab1);
+        /*JDialog mydialog = new JDialog();
+        mydialog.setSize(new Dimension(400,100));
+        mydialog.setTitle("Nova página!");
+        mydialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL); // prevent user from doing something else
+        mydialog.setVisible(true);*/
     }//GEN-LAST:event_btnRegistoActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
@@ -121,8 +177,9 @@ public class MenuInicial extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {      
+            public void run() {
                 new MenuInicial().setVisible(true);
+
             }
         });
     }
@@ -130,5 +187,8 @@ public class MenuInicial extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Button btnLogin;
     private java.awt.Button btnRegisto;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     // End of variables declaration//GEN-END:variables
 }
