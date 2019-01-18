@@ -23,5 +23,9 @@ public class main {
         /*CHAMADA AO MENU PRINCIPAL*/
         MenuInicial m= new MenuInicial();   
         m.setVisible(true);
+        
+//        /*chamada ao form do registo do user*/
+//        RegisterForm f= new RegisterForm();
+//        f.setVisible(true);
     }
 }

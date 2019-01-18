@@ -19,6 +19,7 @@ public class Registo extends EstadoAdapter{
         super(d);
     }
     
+    //método para registar um novo utilizador
     @Override
     public IEstados registo(String n, String p){
         try {
