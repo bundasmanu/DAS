@@ -131,7 +131,6 @@ public class MenuInicial extends javax.swing.JFrame {
 
     private void btnRegistoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistoActionPerformed
         // TODO add your handling code here:
-        
         /*SET VISIBLE DESTA A FALSE E ATIVACAO DA PROXIMA*/
         this.setVisible(false);
         getFac().getJogo().aplica_registo();
@@ -141,6 +140,7 @@ public class MenuInicial extends javax.swing.JFrame {
             new RegisterForm(this.getFac()).setVisible(true);
             this.dispose();
         }
+        
     }//GEN-LAST:event_btnRegistoActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
