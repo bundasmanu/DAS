@@ -11,6 +11,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import javax.swing.BoxLayout;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -30,6 +31,14 @@ public class MenuInicial extends javax.swing.JFrame {
     public MenuInicial() {
         initComponents();
         fac = new Fachada();
+    }
+
+    public Fachada getFac() {
+        return fac;
+    }
+
+    public void setFac(Fachada fac) {
+        this.fac = fac;
     }
 
     /**
@@ -122,30 +131,29 @@ public class MenuInicial extends javax.swing.JFrame {
 
     private void btnRegistoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistoActionPerformed
         // TODO add your handling code here:
-        //com isto funciona bem e aparece o dialog a dizer "Novo utilizador adicionado"
-        fac.getJogo().aplica_registo();
-        fac.getJogo().registo("pedrop","pp");
-//        RegisterForm register_form= new RegisterForm();
-//         register_form.setLayout(new FlowLayout());
-//        register_form.setVisible(true);
-//        add(register_form);
-
-        //new RegisterForm().setVisible(true);
-        //fac.getJogo().aplica_registo();
-        //fac.getJogo().registo("Joao", "Antonio");
-        //JLabel lab1 = new JLabel(fac.getJogo().toString(), JLabel.LEFT);
-        //setLayout(new FlowLayout()); 
-        //add(lab1);
-        /*JDialog mydialog = new JDialog();
-        mydialog.setSize(new Dimension(400,100));
-        mydialog.setTitle("Nova página!");
-        mydialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL); // prevent user from doing something else
-        mydialog.setVisible(true);*/
+        
+        /*SET VISIBLE DESTA A FALSE E ATIVACAO DA PROXIMA*/
+        this.setVisible(false);
+        getFac().getJogo().aplica_registo();
+        IEstados x=this.fac.getJogo().getEstado();
+        if(x instanceof Registo){
+            this.setVisible(false);
+            new RegisterForm(this.getFac()).setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_btnRegistoActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
-        fac.getJogo().aplica_login();
+        this.setVisible(false);
+        getFac().getJogo().aplica_login();
+        IEstados x=this.fac.getFachada().getJogo().getEstado();
+        if(x instanceof Login){
+            this.setVisible(false);
+            new LoginForm(this.getFac()).setVisible(true);
+            this.dispose();
+        }
+
     }//GEN-LAST:event_btnLoginActionPerformed
 
     /**

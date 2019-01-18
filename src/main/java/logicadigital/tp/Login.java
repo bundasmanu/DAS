@@ -20,6 +20,19 @@ public class Login extends EstadoAdapter{
         
         /*IR À BD, VERIFICAR SE EXISTE, SE EXISTIR PASSA PARA O ESTADO MODOGAME*/
         /*SENAO EXISTIR VOLTA AO INICIO*/
+        try{
+            
+            boolean retorno=Session.getUtilizdorOperacaoCRUD().VerificaLogin(n, p);
+            
+            if(retorno==true){ /*Apenas se estiver tudo bem*/
+                return new ModoGame(super.getDadosJogo());
+            }
+            
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        
         return new ModoGame(super.getDadosJogo());
     }
     

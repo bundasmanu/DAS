@@ -99,11 +99,11 @@ public class CRUDUtilizador {
     }
 
     //Display
-    public String SelectEspecifiedUser(Connection connection, String nome) throws SQLException {
+    public String SelectEspecifiedUser(String nome) throws SQLException {
         String info = "";
         try {
           
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM utilizador Where nome=?");
+            PreparedStatement statement = conexao.prepareStatement("SELECT * FROM utilizador Where nome=?");
             //statement.setQueryTimeout(30);
             statement.setString(1, nome);
             ResultSet rs = statement.executeQuery();
@@ -117,35 +117,35 @@ public class CRUDUtilizador {
             System.out.println("Mensgaem:" + e.getMessage());
             return "";
         }
-
+        
+        conexao.close();
         return info;
     }
     
-      public String VerificaLogin(Connection connection, String username, String password) throws SQLException {
+      public boolean VerificaLogin(String username, String password) throws SQLException {
 
         String status = null;
         String query = "select nome,pass from utilizador Where nome=? and pass=?";
 
-        PreparedStatement stmt = connection.prepareStatement(query);
+        PreparedStatement stmt = conexao.prepareStatement(query);
         try {
             ResultSet rs = stmt.executeQuery(query);
             rs.getString(username);
 
-//SELECT * FROM UTILIZADOR Where NOME='Pedro';
+            //SELECT * FROM UTILIZADOR Where NOME='Pedro';
             //rs.getString(username);
             String checkUser = rs.getString(1);
             String checkPass = rs.getString(2);
             if (checkUser.equals(username) && checkPass.equals(password)) {
-                status = "True";
-            } else {
-                status = "False";
+                return true;
             }
-            connection.close();
+             conexao.close();
             
         } catch (Exception e) {
             System.out.println("" + e.getMessage());
-            return "excepcao";
+            return false;
         }
-        return status;
-}
+        
+        return false;
+    }
 }

@@ -5,31 +5,25 @@
  */
 package logicadigital.tp;
 
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import static logicadigital.tp.LoginForm.getF;
 
 /**
  *
- * @author carlo
+ * @author Armando
  */
-public class RegisterForm extends javax.swing.JPanel {
-     Fachada fac;
-     
+public class RegisterForm extends javax.swing.JFrame {
+
     /**
-     * Creates new form RegisterForm
+     * Creates new form g
      */
-    public RegisterForm() {
-        initComponents();
-        fac=new Fachada();
-    }
+    static Fachada f;
     
-    public static JPanel newJPanelRegister(){
-        JPanel panel= new JPanel();
-        return panel;
+    public RegisterForm(Fachada fac) {
+        initComponents();
+        f=fac;
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -39,14 +33,27 @@ public class RegisterForm extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButtonRegister = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextPane1 = new javax.swing.JTextPane();
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jButton_Cancel = new javax.swing.JButton();
-        jButtonRegister = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jButtonRegister.setText("Register");
+        jButtonRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRegisterActionPerformed(evt);
+            }
+        });
+
+        jTextPane1.setBackground(new java.awt.Color(51, 51, 255));
+        jTextPane1.setText("Register Form");
+        jScrollPane1.setViewportView(jTextPane1);
 
         jLabel1.setText("Username:");
 
@@ -63,19 +70,8 @@ public class RegisterForm extends javax.swing.JPanel {
             }
         });
 
-        jButtonRegister.setText("Register");
-        jButtonRegister.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonRegisterActionPerformed(evt);
-            }
-        });
-
-        jTextPane1.setBackground(new java.awt.Color(51, 51, 255));
-        jTextPane1.setText("Register Form");
-        jScrollPane1.setViewportView(jTextPane1);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -95,14 +91,14 @@ public class RegisterForm extends javax.swing.JPanel {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(118, Short.MAX_VALUE))
+                .addContainerGap(123, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -116,13 +112,12 @@ public class RegisterForm extends javax.swing.JPanel {
                     .addComponent(jButton_Cancel))
                 .addGap(79, 79, 79))
         );
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton_CancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CancelActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton_CancelActionPerformed
-
     private void jButtonRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegisterActionPerformed
+        
         String username= jTextField1.getText();
         String password= jTextField2.getText();
         
@@ -133,12 +128,38 @@ public class RegisterForm extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null,"A password nao existe ");
         }
         
-        fac.getJogo().aplica_registo();
-        fac.getJogo().registo(username, password);
-        
+        this.getF().getJogo().registo(username, password);
+        IEstados x=getF().getJogo().getEstado();
+        if(x instanceof ModoGame){
+            this.setVisible(false);
+            new GameTab(getF()).setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_jButtonRegisterActionPerformed
 
-     public static void main(String args[]) {
+    public Fachada getF() {
+        return f;
+    }
+
+    public void setF(Fachada f) {
+        this.f = f;
+    }
+    
+    private void jButton_CancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CancelActionPerformed
+        // TODO add your handling code here:
+        this.getF().getJogo().voltar();
+        IEstados x=getF().getJogo().getEstado();
+        if(x instanceof Inicio){
+            this.setVisible(false);
+            new MenuInicial().setVisible(true);
+            this.dispose();
+        }
+    }//GEN-LAST:event_jButton_CancelActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -152,21 +173,21 @@ public class RegisterForm extends javax.swing.JPanel {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MenuInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegisterForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MenuInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegisterForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MenuInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegisterForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MenuInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegisterForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RegisterForm().setVisible(true);
-
+                new RegisterForm(f).setVisible(true);
             }
         });
     }
