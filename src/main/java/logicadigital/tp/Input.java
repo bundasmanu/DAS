@@ -14,15 +14,36 @@ import java.util.List;
  */
 public class Input {
     
+    int id_input;
+    private static int nextInputID = 1;
+    private int binario;
     
-    public Input(){
-        
+    public Input(int bin){
+        this.id_input=nextInputID;
+        nextInputID++;
+        this.binario=bin;
+    }
+
+    public int getBinario() {
+        return binario;
+    }
+
+    public void setBinario(int binario) {
+        this.binario = binario;
+    }
+
+    public int getId_input() {
+        return id_input;
+    }
+
+    public void setId_input(int id_input) {
+        this.id_input = id_input;
     }
     
     @Override
     public String toString(){
         
-        return "\nInput\n";
+        return this.getBinario()+"\n";
         
     }
     

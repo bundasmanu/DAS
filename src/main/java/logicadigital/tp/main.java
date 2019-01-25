@@ -23,7 +23,7 @@ public class main {
         System.out.println("ola");
 
         /*TESTE A UM MODULO*/
-        Modulo x = new Modulo();
+       /* Modulo x = new Modulo();
         Input x1 = new Input();
         Input x2 = new Input();
         Operador w = new Operador();
@@ -35,10 +35,10 @@ public class main {
         w.getOutputs().add(out);
         w.getInputs().add(x1);
         w.getInputs().add(x2);
-        System.out.println(x.toString());
+        System.out.println(x.toString());*/
         /*CHAMADA AO MENU PRINCIPAL*/
- /*MenuInicial m= new MenuInicial();   
-        m.setVisible(true);*/
+        MenuInicial m= new MenuInicial();   
+        m.setVisible(true);
 
     }
 }

@@ -11,14 +11,28 @@ package logicadigital.tp;
  */
 public class Output {
     
+    private int binario;
+    
+    public Output(int bin){/*CONSTRUTOR CRIADO PARA EFETUAR A VERIFICACAO NOS TESTES*/
+        this.binario=bin;
+    }
+
     public Output(){
         
+    }
+    
+    public int getBinario() {
+        return binario;
+    }
+
+    public void setBinario(int binario) {
+        this.binario = binario;
     }
     
     @Override
     public String toString(){
         
-        return "\nOutput\n";
+        return "\nOutput: "+this.binario+"\n";
         
     }
     

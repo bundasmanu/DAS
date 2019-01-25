@@ -7,6 +7,7 @@ package logicadigital.tp;
 
 import java.awt.Font;
 import javax.swing.JLabel;
+import static logicadigital.tp.Opcao.AND;
 
 /**
  *
@@ -21,7 +22,7 @@ public class GameTab extends javax.swing.JFrame {
     
     public GameTab(Fachada ff) {
         initComponents();
-        ff=f;
+        f=ff;
         lblText.setFont(new Font("Serif", Font.PLAIN, 30));
     }
 
@@ -33,6 +34,31 @@ public class GameTab extends javax.swing.JFrame {
         GameTab.f = f;
     }
     
+    public static void invocaModulo(){
+        int id_modulo=getF().getJogo().criaModulo();/*QUANDO CRIO UM MODULO, OBTENHO O SEU ID*/
+        int id1_input=f.getJogo().insereInputModulo(id_modulo, 1);/*QUANDO CRIO UM INPUT, OBTENHO O SEU ID*/
+        int id2_input=f.getJogo().insereInputModulo(id_modulo, 1);/*QUANDO CRIO UM INPUT, OBTENHO O SEU ID*/
+        int id3_input=f.getJogo().insereInputModulo(id_modulo, 1);/*QUANDO CRIO UM INPUT, OBTENHO O SEU ID*/
+        int id_operador=f.getJogo().insereOperadorModulo(id_modulo, AND);/*INSERE OPERADOR NO MODULO*/
+        int id_operador2=f.getJogo().insereOperadorModulo(id_modulo, AND);/*INSERE OPERADOR NO MODULO*/
+        int id_operador3=f.getJogo().insereOperadorModulo(id_modulo, AND);/*INSERE OPERADOR NO MODULO*/
+        boolean conseguiu_colocar_input_no_operador=getF().getJogo().colocaInputOperador(id1_input, id_modulo, id_operador);/*NECESSARIO COLOCAR O INPUT NO OPERADOR, DE MODO A ESTE CONSEGUIR EFETUAR OS CALCULOS*/
+        boolean conseguiu_colocar_input2_no_operador=getF().getJogo().colocaInputOperador(id2_input, id_modulo, id_operador);/*NECESSARIO COLOCAR O INPUT NO OPERADOR, DE MODO A ESTE CONSEGUIR EFETUAR OS CALCULOS*/
+        boolean conseguiu_colocar_input1_no_operador2=getF().getJogo().colocaInputOperador(id2_input, id_modulo, id_operador2);/*NECESSARIO COLOCAR O INPUT NO OPERADOR, DE MODO A ESTE CONSEGUIR EFETUAR OS CALCULOS*/
+        boolean conseguiu_colocar_input2_no_operador2=getF().getJogo().colocaInputOperador(id3_input, id_modulo, id_operador2);/*NECESSARIO COLOCAR O INPUT NO OPERADOR, DE MODO A ESTE CONSEGUIR EFETUAR OS CALCULOS*/
+        boolean conseguiu_colocar_output_no_operador=getF().getJogo().adicionaOutputAoModuloEOperador(id_modulo, id_operador);
+        //boolean conseguiu_colocar_output_no_operador2=getF().getJogo().adicionaOutputAoModuloEOperador(id_modulo, id_operador2);
+        
+        boolean tr=getF().getJogo().adicionaOperadorOutroOperador(id_modulo, id_operador, id_operador3);
+        boolean tr2=getF().getJogo().adicionaOperadorOutroOperador(id_modulo, id_operador2, id_operador3);
+        
+        boolean conseguiu_colocar_output_no_operador3=getF().getJogo().adicionaOutputAoModuloEOperador(id_modulo, id_operador3);
+        
+        f.getJogo().realizaOperacaoModulo(id_modulo);/*REALIZA AS OPERACOES QUE ESTAO NO MODULO, PARA JA SÓ ESTÁ DEFINIDA A OPERACAO AND*/
+        System.out.println(f.getJogo().listaModulo(id_modulo));/*LISTAGEM DO MODULO, COM OS SEUS DADOS, E VERIFICAR SE O RESULTADO É O ESPERADO*/
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -43,11 +69,19 @@ public class GameTab extends javax.swing.JFrame {
     private void initComponents() {
 
         lblText = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         lblText.setText("Entrada no Jogo");
         lblText.setMaximumSize(new java.awt.Dimension(200, 200));
+
+        jButton1.setText("Modulo");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -55,7 +89,11 @@ public class GameTab extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(138, 138, 138)
-                .addComponent(lblText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(jButton1)))
                 .addContainerGap(170, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -63,11 +101,18 @@ public class GameTab extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(121, 121, 121)
                 .addComponent(lblText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(163, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addContainerGap(120, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        invocaModulo();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -105,6 +150,7 @@ public class GameTab extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel lblText;
     // End of variables declaration//GEN-END:variables
 }

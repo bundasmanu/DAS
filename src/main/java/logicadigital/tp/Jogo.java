@@ -58,6 +58,38 @@ public class Jogo {
         this.setEstado(this.estado.voltar());
     }
     
+    public int criaModulo(){
+        return this.estado.criaModulo();
+    }
+    
+    public int insereInputModulo(int id, int bin){
+        return this.estado.insereInputModulo(id, bin);
+    }
+    
+    public int insereOperadorModulo(int id, Opcao op){
+        return this.estado.insereOperadorModulo(id, op);
+    }
+    
+    public boolean colocaInputOperador(int id_input, int id_modulo, int id_operador){
+        return this.getEstado().colocaInputOperador(id_input, id_modulo, id_operador);
+    }
+    
+    public void realizaOperacaoModulo(int id){
+        this.estado.realizaOperacaoModulo(id);
+    }
+    
+    public String listaModulo(int id){
+        return this.estado.listaModulo(id);
+    }
+    
+    public boolean adicionaOutputAoModuloEOperador(int id_modulo, int id_operador){
+        return this.getEstado().adicionaOutputAoModuloEOperador(id_modulo, id_operador);
+    }
+    
+    public boolean adicionaOperadorOutroOperador(int id_modulo,int id_Operador_Adicionar,int id_Operador_Receber){
+        return this.getEstado().adicionaOperadorOutroOperador(id_modulo, id_Operador_Adicionar, id_Operador_Receber);
+    }
+    
     @Override
     public String toString(){
         

@@ -13,12 +13,16 @@ import java.util.ArrayList;
  * @author Armando
  */
 public class Modulo {
- 
+    
+    int id_modulo;
+    private static int nextModuloID = 1;
     List<Input> inputs;
     List<Output> outputs;
     List<Operador> operador;
     
     public Modulo(){
+        this.id_modulo=nextModuloID;
+        nextModuloID++;
         this.inputs=new ArrayList<Input>();
         this.operador=new ArrayList<Operador>();
         this.outputs=new ArrayList<Output>();
@@ -46,6 +50,10 @@ public class Modulo {
 
     public void setOperador(List<Operador> operador) {
         this.operador = operador;
+    }
+
+    public int getId_modulo() {
+        return id_modulo;
     }
     
     @Override
