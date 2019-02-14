@@ -527,7 +527,7 @@ public class GameTab extends javax.swing.JFrame {
             aux = aux + i;
             in.add(aux);
         }
-
+//ola mundo
         for (int i = 1;
                 i <= AND;
                 i++) {
