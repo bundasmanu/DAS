@@ -7,6 +7,8 @@ package logicadigital.tp;
 
 import java.util.ArrayList;
 import java.util.List;
+import static logicadigital.tp.Opcao.AND;
+import static logicadigital.tp.Opcao.OR;
 
 /**
  *
@@ -94,6 +96,28 @@ public class Operador {
         
     }
     
+    public int calculaOrInputs(){
+        
+        try{
+            
+            if(this.inputs.isEmpty()==true){
+                return -1;
+            }
+            
+            int x=this.getInputs().get(0).getBinario();
+            for(Input w : this.getInputs().subList(1, this.getInputs().size())){
+                x= (x | w.getBinario());
+            }
+            
+            return x;
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+            return -1;
+        }
+        
+    }
+    
     /*SE FOR OPERADOR SOMA*/
     public boolean realizaAND(){
         
@@ -124,13 +148,19 @@ public class Operador {
             }
                         
             /*CASO AGORA ESTEJA LIGADO A UM OUTRO OPERADOR ENTAO, E NECESSARIO MEDIANTE OS SEUS INPUTS, COLOCAR O SOMATORIO NOS SEUS INPUTS*/
-            if(this.getOperadores().isEmpty()==false){
-               for(Operador oe : this.getOperadores()){
-                   int soma_and_inputs=oe.calculaSomaInputs();
-                   if(soma_and_inputs!=-1){
-                       this.getInputs().add(new Input(soma_and_inputs));
-                   }
-               }
+            if (this.getOperadores().isEmpty() == false) {
+                for (Operador oe : this.getOperadores()) {
+                    int soma_and_inputs = -1;
+                    if (oe.qual == AND) {
+                        soma_and_inputs = oe.calculaSomaInputs();
+                    }
+                    if (oe.qual == OR) {
+                        soma_and_inputs = oe.calculaOrInputs();
+                    }
+                    if (soma_and_inputs != -1) {
+                        this.getInputs().add(new Input(soma_and_inputs));
+                    }
+                }
             }
             
             /*CASO ESTEJA LIGADO A OUTPUT ENTAO FACO A ADICAO DE TODOS OS SEUS INPUTS E COLOCO O OUTPUT COM O VALOR DA SUA SOMA*/
@@ -138,10 +168,14 @@ public class Operador {
                 /*EFETUAR O SOMATORIO DE TODOS OS INPUTS*/
                 /*DEFINIR AGORA OS SEUS OUTPUTS COM O VALOR DE x*/
                 for(Output o :  this.getOutputs()){
-                    o.setBinario(this.calculaSomaInputs());
+                    if(this.qual==AND){
+                        o.setBinario(this.calculaSomaInputs());
+                    }
+                    if(this.qual==OR){
+                        o.setBinario(this.calculaOrInputs());
+                    }
                 }
-            }
-       
+            }      
             
             return true;
             

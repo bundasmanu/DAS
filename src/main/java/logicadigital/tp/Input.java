@@ -41,6 +41,40 @@ public class Input {
     }
     
     @Override
+    public int hashCode(){
+        
+        int hash=17;
+        
+        hash+=this.id_input;
+        
+        return hash;
+    }
+    
+    @Override
+    public boolean equals(Object obj){
+        
+        if(obj==null){
+            return false;
+        }
+        
+        if(obj instanceof Input ==false){
+            return false;
+        }
+        
+        if(this==obj){
+            return true;
+        }
+        
+        Input inp= (Input) obj;
+        
+        if(this.id_input!=inp.getId_input()){
+            return false;
+        }
+        
+        return true;
+    }
+    
+    @Override
     public String toString(){
         
         return this.getBinario()+"\n";

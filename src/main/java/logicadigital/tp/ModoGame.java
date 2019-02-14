@@ -5,8 +5,10 @@
  */
 package logicadigital.tp;
 
+import java.util.ArrayList;
 import java.util.List;
 import static logicadigital.tp.Opcao.AND;
+import static logicadigital.tp.Opcao.OR;
 
 /**
  *
@@ -31,12 +33,24 @@ public class ModoGame extends EstadoAdapter{
         return 1;
     }
     
+    /*UNDO DO CRIA MODULO*/
+    public void removeModulo(int id_modulo){
+        
+        try{
+            super.getDadosJogo().removeModulo(id_modulo);/*ATENCAO QUE CASO FACO UM REMOVE DO MODULO, */
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        
+    }
+    
     @Override
-    public int insereInputModulo(int id, int bin){/*SELECCIONAR PRIMEIRO QUAL O MODULO (ID), DEPOIS VER ISSO*/
+    public int insereInputModulo(int id_modulo, int bin){/*SELECCIONAR PRIMEIRO QUAL O MODULO (ID), DEPOIS VER ISSO*/
         
         try{
             Input in=new Input(bin);
-            super.getDadosJogo().getModulo(id).getInputs().add(in);
+            super.getDadosJogo().getModulo(id_modulo).getInputs().add(in);
             return in.getId_input();
         }
         catch(Exception e){
@@ -45,6 +59,35 @@ public class ModoGame extends EstadoAdapter{
         }
         
     }
+    
+    /*UNDO DA OPERACAO INSERE OUTPUT NO MODULO*/
+    public boolean removeInputModulo(int id_modulo, Input passar_input){/*QUANDO INSIRO O INPUT NO MODULO, UMA VARIAVEL INPUT IRA TER A REFERENCIA DA VARIAVEL INPUT INSTANCIADA NO MODULO*/
+        
+        try{
+          
+            Modulo m=super.getDadosJogo().getModulo(id_modulo);
+            
+            if(m==null){
+                return false;
+            }
+            
+            boolean retorno_input=m.getInputs().contains(passar_input);
+            if(retorno_input==true){
+                m.getInputs().remove(passar_input); /*ID IGUAL A POSICAO -1*/
+            }
+            else{
+                return false;
+            }
+            
+            return true;
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+            return false;
+        }
+        
+    }
+    
     
     @Override
     public int insereOperadorModulo(int id, Opcao op){
@@ -58,6 +101,28 @@ public class ModoGame extends EstadoAdapter{
         catch(Exception e){
             System.out.println(e.getMessage());
             return 0;
+        }
+        
+    }
+    
+    /*OPERACAO UNDO RELATIVA AO INSERE OPERADOR NUM DETERMINADO MODULO*/
+    public boolean retiraOperadorModulo(int id_modulo, Operador op){ /*É PASSADA UMA REFERENCIA PARA O OPERADOR QUE FOI ADICIONADO AO MODULO*/
+        
+        try{
+            
+            Modulo m=super.getDadosJogo().getModulo(id_modulo);
+            
+            if(m==null){
+                return false;
+            }
+            
+            m.getOperador().remove(op);
+
+            return true;
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+            return false;
         }
         
     }
@@ -112,8 +177,8 @@ public class ModoGame extends EstadoAdapter{
         return false;
     }
     
-    @Override
-    public boolean adicionaOutputAoModuloEOperador(int id_modulo, int id_operador){
+    /*OPERACAO UNDO DO INSERE INPUT OPERADOR*/
+    public boolean retiraInputOperador(int id_modulo, int id_operador, Input in){
         
         try{
             
@@ -124,11 +189,46 @@ public class ModoGame extends EstadoAdapter{
                 return false;
             }
             
+            /*VERIFICAR AGORA SE O OPERADOR AINDA EXISTE*/
+            Operador op=null;
+            for(Operador x : m.getOperador()){
+                if(x.getId_operador()==id_operador){
+                    op=x;
+                }
+            }
+            
+            if(op==null){
+                return false;
+            }
+            
+            /*RETIRAR O INPUT DO OPERADOR*/
+            return op.getInputs().remove(in);
+            
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+            return false;
+        }
+        
+    }
+    
+    @Override
+    public int adicionaOutputAoModuloEOperador(int id_modulo, int id_operador){
+        
+        try{
+            
+            /*VERIFICAR SE O MODULO EXISTE*/
+            Modulo m=super.getDadosJogo().getModulo(id_modulo);
+            
+            if(m==null){
+                return -1;
+            }
+            
             /*VERIFICAR SE EXISTE O OPERADOR-->SE EXISTIR ADICIONAR O OUTPUT AO OPERADOR*/
             List<Operador> lista_de_todos_operadores_modulo=m.getOperador();
             
             if(lista_de_todos_operadores_modulo.isEmpty()==true){
-                return false;
+                return -1;
             }
             
             for(Operador x : m.getOperador()){
@@ -137,17 +237,46 @@ public class ModoGame extends EstadoAdapter{
                     Output out=new Output(); 
                     m.getOutputs().add(out);
                     x.getOutputs().add(out);
-                    return true;
+                    return out.getId_input();
                 }
             }
 
         }
         catch(Exception e){
             System.out.println(e.getMessage());
+            return -1;
+        }
+        
+        return -1;
+    }
+    
+    /*OPERACAO UNDO DO ADICIONA OUTPUT AO MODULO E OPERADOR*/
+    public boolean retiraOutputAoModuloEOperador(int id_modulo, int id_operador, Output out){
+        
+        try{
+            
+            /*VERIFICAR SE O MODULO EXISTE*/
+            Modulo m=super.getDadosJogo().getModulo(id_modulo);
+            
+            if(m==null){
+                return false;
+            }
+            
+            /*VERIFICAR SE EXISTE O OPERADOR*/
+            for(Operador x : m.getOperador()){
+                if(x.getId_operador()==id_operador){
+                    m.getOutputs().remove(out);//-->BASTA REMOVER DE UM DOS LADOS, POIS A REFERENCIA É A MESMA. MAS DPS CONFIRMAR
+                    //x.getOutputs().remove(out);
+                }
+            }
+            
+            return true;
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
             return false;
         }
         
-        return false;
     }
     
     @Override
@@ -197,6 +326,43 @@ public class ModoGame extends EstadoAdapter{
         
     }
     
+    /*REALIZA UNDO ADICIONA OPERADOR A OUTRO OPERADOR*/
+    public boolean retiraOperadorOutroOperador(int id_modulo,int id_operador_recebeu,Operador retirar){
+        
+        try{
+            
+            /*VERIFICAR SE O MODULO EXISTE*/
+            Modulo m=super.getDadosJogo().getModulo(id_modulo);
+            
+            if(m==null){
+                return false;
+            }
+            
+            /*VERIFICAR SE AMBOS OS OPERADORES EXISTEM NO MODULO*/
+            Operador recebeu=null;
+            Operador adicionado=null;
+            for(Operador x : m.getOperador()){
+                if(x.getId_operador()==id_operador_recebeu){
+                    recebeu=x;
+                }
+                if(x.getId_operador()==retirar.getId_operador()){
+                    adicionado=x;
+                }
+            }
+            
+            if(recebeu!=null && adicionado!=null){
+                recebeu.getOperadores().remove(adicionado);
+                return true;
+            }
+            
+            return false;
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+    
     @Override
     public void realizaOperacaoModulo(int id){
         
@@ -213,11 +379,93 @@ public class ModoGame extends EstadoAdapter{
                 if(x.getQual()==AND){
                     boolean correu_bem=x.realizaAND();
                 }
+                if(x.getQual()==OR){
+                    boolean correu=x.realizaAND();
+                }
             }
             
         }
         catch(Exception e){
             System.out.println(e.getMessage());
+        }
+        
+    }
+    
+    @Override
+    public boolean setValOutput(int id_modulo, int id_output, int bin){
+        
+        try{
+            
+            /*VERIFICAR SE O MODULO EXISTE*/
+            Modulo m=super.getDadosJogo().getModulo(id_modulo);
+            
+            if(m==null){
+                return false;
+            }
+            
+            /*VERIFICAR SE EXISTE AQUELE OUTPUT NO MODULO*/
+            int existe=0;
+            for(Output x : m.getOutputs()){
+                if(x.getId_input()==id_output){
+                    existe++;
+                    x.setBinario(bin);
+                    break;
+                }
+            }
+            
+            if(existe==0){ /*SE NAO ENCONTROU O ID DO OUTPUT*/
+                return false;
+            }
+            
+            
+            return true;
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+            return false;
+        }
+        
+    }
+    
+    @Override
+    public String confirmaValoresOutput(int id_modulo){
+        
+        try{
+            
+            /*VERIFICA SE O MODULO EXISTE*/
+            Modulo m=super.getDadosJogo().getModulo(id_modulo);
+            if(m==null){
+                return "\nProblema, nao existe o modulo\n";
+            }
+            
+            if(m.getOutputs().isEmpty()==true){
+                return "\nNao existem outputs associados ao Modulo\n";
+            }
+            
+            /*INICIALIZAR A LISTA DE OUTPUTS TEMPORARIA, DE MODO A COMPARAR COM OS NOVOS DADOS DA SIMULACAO*/
+            List<Output> lista_temporaria_outputs=new ArrayList<Output>();
+            for(Output x : m.getOutputs()){
+                lista_temporaria_outputs.add(new Output(x.getBinario()));
+            }
+            
+            /*CHAMA OPERADOR DE REALIZAR DE TODA A SIIMULACAO DO MODULO*/
+            this.realizaOperacaoModulo(m.getId_modulo());
+
+            String info_bateu_certo="";
+            for(int i=0;i<m.getOutputs().size();++i){
+                if(m.getOutputs().get(i).getBinario()==lista_temporaria_outputs.get(i).getBinario()){
+                    info_bateu_certo+="\nResultado igual ao indicado\n";
+                }
+                else{
+                    info_bateu_certo+="\nResultado diferente ao indicado\n";
+                }
+            }
+            
+            return info_bateu_certo;
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+            return "";
         }
         
     }

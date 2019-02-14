@@ -8,6 +8,7 @@ package logicadigital.tp;
 import java.awt.Font;
 import javax.swing.JLabel;
 import static logicadigital.tp.Opcao.AND;
+import static logicadigital.tp.Opcao.OR;
 
 /**
  *
@@ -36,28 +37,32 @@ public class GameTab extends javax.swing.JFrame {
     
     public static void invocaModulo(){
         int id_modulo=getF().getJogo().criaModulo();/*QUANDO CRIO UM MODULO, OBTENHO O SEU ID*/
-        int id1_input=f.getJogo().insereInputModulo(id_modulo, 1);/*QUANDO CRIO UM INPUT, OBTENHO O SEU ID*/
-        int id2_input=f.getJogo().insereInputModulo(id_modulo, 1);/*QUANDO CRIO UM INPUT, OBTENHO O SEU ID*/
-        int id3_input=f.getJogo().insereInputModulo(id_modulo, 1);/*QUANDO CRIO UM INPUT, OBTENHO O SEU ID*/
+        getF().getJogo().getDadosJogo().getCom().apply(new CriaModulo());
+        int id1_input=f.getJogo().insereInputModulo(id_modulo, 0);/*QUANDO CRIO UM INPUT, OBTENHO O SEU ID*/
+        int id2_input=f.getJogo().insereInputModulo(id_modulo, 0);/*QUANDO CRIO UM INPUT, OBTENHO O SEU ID*/
+        int id3_input=f.getJogo().insereInputModulo(id_modulo, 0);/*QUANDO CRIO UM INPUT, OBTENHO O SEU ID*/
         int id_operador=f.getJogo().insereOperadorModulo(id_modulo, AND);/*INSERE OPERADOR NO MODULO*/
-        int id_operador2=f.getJogo().insereOperadorModulo(id_modulo, AND);/*INSERE OPERADOR NO MODULO*/
+        int id_operador2=f.getJogo().insereOperadorModulo(id_modulo, OR);/*INSERE OPERADOR NO MODULO*/
         int id_operador3=f.getJogo().insereOperadorModulo(id_modulo, AND);/*INSERE OPERADOR NO MODULO*/
         boolean conseguiu_colocar_input_no_operador=getF().getJogo().colocaInputOperador(id1_input, id_modulo, id_operador);/*NECESSARIO COLOCAR O INPUT NO OPERADOR, DE MODO A ESTE CONSEGUIR EFETUAR OS CALCULOS*/
         boolean conseguiu_colocar_input2_no_operador=getF().getJogo().colocaInputOperador(id2_input, id_modulo, id_operador);/*NECESSARIO COLOCAR O INPUT NO OPERADOR, DE MODO A ESTE CONSEGUIR EFETUAR OS CALCULOS*/
         boolean conseguiu_colocar_input1_no_operador2=getF().getJogo().colocaInputOperador(id2_input, id_modulo, id_operador2);/*NECESSARIO COLOCAR O INPUT NO OPERADOR, DE MODO A ESTE CONSEGUIR EFETUAR OS CALCULOS*/
         boolean conseguiu_colocar_input2_no_operador2=getF().getJogo().colocaInputOperador(id3_input, id_modulo, id_operador2);/*NECESSARIO COLOCAR O INPUT NO OPERADOR, DE MODO A ESTE CONSEGUIR EFETUAR OS CALCULOS*/
-        boolean conseguiu_colocar_output_no_operador=getF().getJogo().adicionaOutputAoModuloEOperador(id_modulo, id_operador);
+        int conseguiu_colocar_output_no_operador=getF().getJogo().adicionaOutputAoModuloEOperador(id_modulo, id_operador);
         //boolean conseguiu_colocar_output_no_operador2=getF().getJogo().adicionaOutputAoModuloEOperador(id_modulo, id_operador2);
         
         boolean tr=getF().getJogo().adicionaOperadorOutroOperador(id_modulo, id_operador, id_operador3);
         boolean tr2=getF().getJogo().adicionaOperadorOutroOperador(id_modulo, id_operador2, id_operador3);
         
-        boolean conseguiu_colocar_output_no_operador3=getF().getJogo().adicionaOutputAoModuloEOperador(id_modulo, id_operador3);
+        int conseguiu_colocar_output_no_operador3=getF().getJogo().adicionaOutputAoModuloEOperador(id_modulo, id_operador3);
         
-        f.getJogo().realizaOperacaoModulo(id_modulo);/*REALIZA AS OPERACOES QUE ESTAO NO MODULO, PARA JA SÓ ESTÁ DEFINIDA A OPERACAO AND*/
+        getF().getJogo().setValOutput(id_modulo, conseguiu_colocar_output_no_operador,0);
+        getF().getJogo().setValOutput(id_modulo, conseguiu_colocar_output_no_operador3,1);
+        String nd=getF().getJogo().confirmaValoresOutput(id_modulo);
+        
+        //f.getJogo().realizaOperacaoModulo(id_modulo);/*REALIZA AS OPERACOES QUE ESTAO NO MODULO, PARA JA SÓ ESTÁ DEFINIDA A OPERACAO AND*/
         System.out.println(f.getJogo().listaModulo(id_modulo));/*LISTAGEM DO MODULO, COM OS SEUS DADOS, E VERIFICAR SE O RESULTADO É O ESPERADO*/
     }
-    
     
     /**
      * This method is called from within the constructor to initialize the form.

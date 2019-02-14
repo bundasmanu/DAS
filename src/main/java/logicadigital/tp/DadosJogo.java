@@ -18,10 +18,22 @@ public class DadosJogo {
     
     private List<Modulo> m;
     
+    /*COLOCAR AQUI UM GESTOR DE COMANDOS*/
+    GestorComandos com= new GestorComandos(this);
+
+    
     public DadosJogo(){
         this.m=new ArrayList<Modulo>();
     }
 
+    public GestorComandos getCom() {
+        return com;
+    }
+
+    public void setCom(GestorComandos com) {
+        this.com = com;
+    }
+    
     public Session getSessao(){
         
         if(sessao==null){
@@ -54,7 +66,7 @@ public class DadosJogo {
         Modulo mo=new Modulo();
         int x=mo.getId_modulo();
         this.m.add(mo);
-        return x; 
+        return x;
     }
     
     public boolean removeModulo(int id){
