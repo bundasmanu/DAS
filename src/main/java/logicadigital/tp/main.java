@@ -18,9 +18,6 @@ public class main {
 
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
         System.out.println("Ola mundo");
-        System.out.println("oi");
-        System.out.println("ok zes");
-        System.out.println("ola");
 
         /*TESTE A UM MODULO*/
        /* Modulo x = new Modulo();
