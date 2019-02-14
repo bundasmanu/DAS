@@ -5,6 +5,10 @@
  */
 package logicadigital.tp;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.SQLException;
+
 /**
  *
  * @author Armando
@@ -24,5 +28,6 @@ public interface IEstados {
     public boolean adicionaOperadorOutroOperador(int id_modulo,int id_Operador_Adicionar,int id_Operador_Receber);/*AMBOS JÁ SE ENCONTRAM NO MODULO, BASTANDO APENAS ADICIONAR O OPERADOR NO OUTRO*/
     public void realizaOperacaoModulo(int id);
     public String listaModulo(int id);
-    
+    public boolean WriteNameOfUserBinaryFile(Utilizador u) throws ClassNotFoundException, SQLException;
+    public boolean ReadBinaryFile(Object u) throws FileNotFoundException, IOException;
 }
