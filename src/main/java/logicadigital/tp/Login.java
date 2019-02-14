@@ -5,40 +5,56 @@
  */
 package logicadigital.tp;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.sql.SQLException;
+
 /**
  *
  * @author Armando
  */
-public class Login extends EstadoAdapter{
-    
-    public Login(DadosJogo d){
+public class Login extends EstadoAdapter {
+
+    public Login(DadosJogo d) {
         super(d);
     }
-    
+
     @Override
-    public IEstados login(String n, String p){
-        
+    public IEstados login(String n, String p) {
+
         /*IR À BD, VERIFICAR SE EXISTE, SE EXISTIR PASSA PARA O ESTADO MODOGAME*/
-        /*SENAO EXISTIR VOLTA AO INICIO*/
-        try{
-            
+ /*SENAO EXISTIR VOLTA AO INICIO*/
+        try {
+
             boolean retorno=Session.getUtilizdorOperacaoCRUD().VerificaLogin(n, p);
             
             if(retorno==true){ /*Apenas se estiver tudo bem*/
-                return new ModoGame(super.getDadosJogo());
+                Utilizador utilizador= new Utilizador(n, p);
+                FicheiroBIN fich_bin= new FicheiroBIN();
+                boolean status=fich_bin.WriteNameOfUserBinaryFile(utilizador);
+                System.out.println(""+status);
+                boolean status_leitura_file= fich_bin.ReadBinaryFile(utilizador);
+                System.out.println(""+status_leitura_file);
+               
             }
-            
-        }
-        catch(Exception e){
+
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        
+
         return new ModoGame(super.getDadosJogo());
     }
-    
+
     @Override
-    public IEstados voltar(){
+    public IEstados voltar() {
         return new Inicio(new DadosJogo());/*NOVA INSTANCIA DE JOGO*/
     }
-    
-}
+
+    //se o user autenticar-se na aplicação com sucesso, então o nome desse mesmo utilizador e guardado num ficheiro
+
+ }
+//}
