@@ -9,7 +9,7 @@ package logicadigital.tp;
  *
  * @author Armando
  */
-public class CriaOperador {
+public class CriaOperador implements Comando{
     
     int id_modulo;
     Opcao op;

@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author Armando
  */
-public class LigaOperadorOperador {
+public class LigaOperadorOperador implements Comando{
     
     private int id_modulo;
     private int id_operador_fornecer;
