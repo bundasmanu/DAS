@@ -76,13 +76,23 @@ public abstract class EstadoAdapter implements IEstados {
     }
     
     @Override
-    public boolean adicionaOutputAoModuloEOperador(int id_modulo, int id_operador){
-        return false;
+    public int adicionaOutputAoModuloEOperador(int id_modulo, int id_operador){
+        return -1;
     }
     
     @Override
     public boolean adicionaOperadorOutroOperador(int id_modulo,int id_Operador_Adicionar,int id_Operador_Receber){
         return false;
+    }
+    
+    @Override
+    public boolean setValOutput(int id_modulo, int id_output, int bin){
+        return false;
+    }
+    
+    @Override
+    public String confirmaValoresOutput(int id_modulo){
+        return "";
     }
     
     @Override

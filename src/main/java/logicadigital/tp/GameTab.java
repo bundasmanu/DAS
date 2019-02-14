@@ -64,19 +64,25 @@ public class GameTab extends javax.swing.JFrame {
     }
 
     public static void criaEntradas(int id_modulo, int bin) {
-        f.getJogo().insereInputModulo(id_modulo, bin);
+        //f.getJogo().insereInputModulo(id_modulo, bin);
+        Comando c = new CriaInput(id_modulo, bin);
+        f.getJogo().getDadosJogo().getCom().apply(c);
     }
 
     public static void criaOperadoresAnd(int id_modulo) {
-        f.getJogo().insereOperadorModulo(id_modulo, AND);
+        //f.getJogo().insereOperadorModulo(id_modulo, AND);
+        Comando c = new CriaOperador(id_modulo, AND);
+        f.getJogo().getDadosJogo().getCom().apply(c);
     }
 
     public static void criaOperadoresOr(int id_modulo) {
-        f.getJogo().insereOperadorModulo(id_modulo, OR);
+        //f.getJogo().insereOperadorModulo(id_modulo, OR);
+        Comando c = new CriaOperador(id_modulo, OR);
+        f.getJogo().getDadosJogo().getCom().apply(c);
     }
 
     public static void criaSaidas(int id_modulo) {
-
+        //Comando c = new CriaOutput(id_modulo, id_mod);
     }
 
     public static void invocaModulo() {
@@ -91,13 +97,10 @@ public class GameTab extends javax.swing.JFrame {
         boolean conseguiu_colocar_input2_no_operador = getF().getJogo().colocaInputOperador(id2_input, id_modulo, id_operador);/*NECESSARIO COLOCAR O INPUT NO OPERADOR, DE MODO A ESTE CONSEGUIR EFETUAR OS CALCULOS*/
         boolean conseguiu_colocar_input1_no_operador2 = getF().getJogo().colocaInputOperador(id2_input, id_modulo, id_operador2);/*NECESSARIO COLOCAR O INPUT NO OPERADOR, DE MODO A ESTE CONSEGUIR EFETUAR OS CALCULOS*/
         boolean conseguiu_colocar_input2_no_operador2 = getF().getJogo().colocaInputOperador(id3_input, id_modulo, id_operador2);/*NECESSARIO COLOCAR O INPUT NO OPERADOR, DE MODO A ESTE CONSEGUIR EFETUAR OS CALCULOS*/
-        boolean conseguiu_colocar_output_no_operador = getF().getJogo().adicionaOutputAoModuloEOperador(id_modulo, id_operador);
         //boolean conseguiu_colocar_output_no_operador2=getF().getJogo().adicionaOutputAoModuloEOperador(id_modulo, id_operador2);
 
         boolean tr = getF().getJogo().adicionaOperadorOutroOperador(id_modulo, id_operador, id_operador3);
         boolean tr2 = getF().getJogo().adicionaOperadorOutroOperador(id_modulo, id_operador2, id_operador3);
-
-        boolean conseguiu_colocar_output_no_operador3 = getF().getJogo().adicionaOutputAoModuloEOperador(id_modulo, id_operador3);
 
         f.getJogo().realizaOperacaoModulo(id_modulo);/*REALIZA AS OPERACOES QUE ESTAO NO MODULO, PARA JA SÓ ESTÁ DEFINIDA A OPERACAO AND*/
         System.out.println(f.getJogo().listaModulo(id_modulo));/*LISTAGEM DO MODULO, COM OS SEUS DADOS, E VERIFICAR SE O RESULTADO É O ESPERADO*/
@@ -624,9 +627,9 @@ public class GameTab extends javax.swing.JFrame {
         for (int i = 0; i < numOperadorOr; i++) {
             criaOperadoresOr(id_mod);
         }
-        for (int i = 0; i < numOutput; i++) {
-            criaSaidas(id_mod);
-        }
+//        for (int i = 0; i < numOutput; i++) {
+//            criaSaidas(id_mod);
+//        }
         //cria ligacoes
 
     }//GEN-LAST:event_jButton2ActionPerformed
