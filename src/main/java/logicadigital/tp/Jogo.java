@@ -82,12 +82,20 @@ public class Jogo {
         return this.estado.listaModulo(id);
     }
     
-    public boolean adicionaOutputAoModuloEOperador(int id_modulo, int id_operador){
+    public int adicionaOutputAoModuloEOperador(int id_modulo, int id_operador){
         return this.getEstado().adicionaOutputAoModuloEOperador(id_modulo, id_operador);
     }
     
     public boolean adicionaOperadorOutroOperador(int id_modulo,int id_Operador_Adicionar,int id_Operador_Receber){
         return this.getEstado().adicionaOperadorOutroOperador(id_modulo, id_Operador_Adicionar, id_Operador_Receber);
+    }
+    
+    public boolean setValOutput(int id_modulo, int id_output, int bin){
+        return this.getEstado().setValOutput(id_modulo, id_output, bin);
+    }
+    
+    public String confirmaValoresOutput(int id_modulo){
+        return this.getEstado().confirmaValoresOutput(id_modulo);
     }
     
     @Override

@@ -24,5 +24,9 @@ public class Inicio extends EstadoAdapter{
     public IEstados aplica_login(){
         return new Login(super.getDadosJogo());
     }
+
+   
+
+  
     
 }

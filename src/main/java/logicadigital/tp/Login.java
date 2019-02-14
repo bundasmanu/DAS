@@ -39,7 +39,7 @@ public class Login extends EstadoAdapter {
                 System.out.println(""+status);
                 boolean status_leitura_file= fich_bin.ReadBinaryFile(utilizador);
                 System.out.println(""+status_leitura_file);
-                return new ModoGame(super.getDadosJogo());
+               
             }
 
         } catch (Exception e) {
