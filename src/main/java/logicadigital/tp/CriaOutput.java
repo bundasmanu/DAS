@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author Armando
  */
-public class CriaOutput {
+public class CriaOutput implements Comando{
     
     private int id_modulo;
     private int id_operador;

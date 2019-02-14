@@ -5,6 +5,8 @@
  */
 package logicadigital.tp;
 
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -37,7 +39,7 @@ public class CRUDUtilizador {
 
             if (result > 0) {
                 System.out.println("Utilizador inserido com sucesso");
-                JOptionPane.showMessageDialog(null,"Novo utilizador adicionado");
+                JOptionPane.showMessageDialog(null, "Novo utilizador adicionado");
                 return true;
             } else {
                 System.out.println("Utilizador nao inserido");
@@ -50,6 +52,8 @@ public class CRUDUtilizador {
         }
 
     }
+
+  
 
     //Update
     public boolean UpdateUtilizador(String new_nome, String new_passwords) throws SQLException {
@@ -102,22 +106,21 @@ public class CRUDUtilizador {
     public String SelectEspecifiedUser(String nome) throws SQLException {
         String info = "";
         try {
-          
+
             PreparedStatement statement = conexao.prepareStatement("SELECT * FROM utilizador Where nome=?");
             //statement.setQueryTimeout(30);
             statement.setString(1, nome);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
-            info = "ID: " + rs.getString("ID") + " Nome: " + rs.getString("NOME") + " Pass: " + rs.getString("PASS");
+                info = "ID: " + rs.getString("ID") + " Nome: " + rs.getString("NOME") + " Pass: " + rs.getString("PASS");
 
-        }
+            }
 
-            
         } catch (Exception e) {
             System.out.println("Mensgaem:" + e.getMessage());
             return "";
         }
-        
+
         conexao.close();
         return info;
     }
@@ -144,31 +147,60 @@ public class CRUDUtilizador {
         }
         
     }
-    
-      public boolean VerificaLogin(String username, String password) throws SQLException {
 
-        String status = null;
+    public boolean VerificaLogin(String username, String password) throws SQLException {
+        try {
+        int status = 0;
         String query = "select nome,pass from utilizador Where nome=? and pass=?";
 
         PreparedStatement stmt = conexao.prepareStatement(query);
-        try {
-            ResultSet rs = stmt.executeQuery(query);
-            rs.getString(username);
-
-            //SELECT * FROM UTILIZADOR Where NOME='Pedro';
-            //rs.getString(username);
-            String checkUser = rs.getString(1);
-            String checkPass = rs.getString(2);
-            if (checkUser.equals(username) && checkPass.equals(password)) {
-                return true;
+        
+            stmt.setString(1, username);
+            stmt.setString(2, password);
+            ResultSet rs=stmt.executeQuery();
+           
+            while(rs.next()){
+                String nome= rs.getString(1);
+                String pass= rs.getString(2);
+                System.out.println(""+nome+"\t"+pass+"\t");
+                
             }
-             conexao.close();
             
+          
+            return true; 
         } catch (Exception e) {
             System.out.println("" + e.getMessage());
             return false;
         }
-        
-        return false;
+
+       
     }
+    
+     
+    
+//     public void VerificaLogin(String username, String password) throws SQLException {
+//         boolean flag=false;
+//         try{
+//             String query= "Select nome, pass from utilizador";
+//             PreparedStatement stmt= conexao.prepareStatement(query);
+//             ResultSet results= stmt.executeQuery(query);
+//             while(results.next()){
+//                 String user= results.getString("nome");
+//                 String pass= results.getString("pass");
+//                 
+//                 if((username.equals(user)) && (password.equals(pass))){
+//                     flag=true;
+//                     JOptionPane.showMessageDialog(null,"O nome e a password existem");
+//                 }
+//                 results.close();
+//                 if(!flag){
+//                     JOptionPane.showMessageDialog(null,"Por favor verifique o seu nome e password");
+//                 }
+//             }
+//             }
+//         catch(Exception e){
+//             System.out.println(""+e.getMessage());
+//         }
+//
+//     }
 }

@@ -9,7 +9,7 @@ package logicadigital.tp;
  *
  * @author Armando
  */
-public class CriaInput {
+public class CriaInput implements Comando{
 
     Input in;
     int id_modulo;

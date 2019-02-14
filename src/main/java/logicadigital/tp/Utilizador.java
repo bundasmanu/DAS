@@ -5,11 +5,13 @@
  */
 package logicadigital.tp;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Stefan Loureiro
  */
-public class Utilizador {
+public class Utilizador implements Serializable{
     
     public static int id;
     public String nome;
@@ -45,8 +47,7 @@ public class Utilizador {
     }
     
     public String toString() {
-        String str = "";
-        System.out.println(" Id do user: " + this.id + " Nome do user: " + this.nome + "Pass do user: " + this.password);
+        String str = "ID: "+ this.id+"Nome: "+ this.nome+ "Password: "+this.password;
         return str;
     }
     
