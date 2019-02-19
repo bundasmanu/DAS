@@ -21,6 +21,7 @@ public class Login extends EstadoAdapter {
 
     public Login(DadosJogo d) {
         super(d);
+        
     }
 
     @Override
