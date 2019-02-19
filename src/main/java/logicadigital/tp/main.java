@@ -54,17 +54,21 @@ public class main {
         /*CHAMADA AO MENU PRINCIPAL*/
         FicheirosFabrica ficheiro_fabrica = new FicheirosFabrica();
         AbstractFactory f= ficheiro_fabrica.getTipoFicheiros("BLIF");
-        ComandoFicheiros comando_ficheiros= new ComandoFicheiros();
-        String comando=comando_ficheiros.executaComandoModulo();
-        comando_ficheiros.escreverComandoParaFicheiroBlif(comando);
-        Input x1= new Input(0);
-        String comando_input= comando_ficheiros.executaComandoInput(x1);
-        comando_ficheiros.escreverComandoParaFicheiroBlif(comando_input);
-        Output x2= new Output(1);
-        String comando_output= comando_ficheiros.executaComandoOutput(x2);
-        comando_ficheiros.escreverComandoParaFicheiroBlif(comando_output);
-        String comando_end= comando_ficheiros.executaComandoEnd();
-        comando_ficheiros.escreverComandoParaFicheiroBlif(comando_end);
+        
+        
+     //parte referente aos ficheiros
+//        ComandoFicheiros comando_ficheiros= new ComandoFicheiros();
+//        String comando=comando_ficheiros.executaComandoModulo();
+//        System.out.println(""+comando);
+//        comando_ficheiros.escreverComandoParaFicheiroBlif(comando);
+//        Input x1= new Input(0);
+//        String comando_input= comando_ficheiros.executaComandoInput("A");
+//        comando_ficheiros.escreverComandoParaFicheiroBlif(comando_input);
+//        Output x2= new Output(1);
+//        String comando_output= comando_ficheiros.executaComandoOutput(x2);
+//        comando_ficheiros.escreverComandoParaFicheiroBlif(comando_output);
+//        String comando_end= comando_ficheiros.executaComandoEnd();
+//        comando_ficheiros.escreverComandoParaFicheiroBlif(comando_end);
         
         //f.ImportaFicheiro();
         //f.ExportaFicheiro();

@@ -34,12 +34,17 @@ public class Login extends EstadoAdapter {
             
             if(retorno==true){ /*Apenas se estiver tudo bem*/
                 Utilizador utilizador= new Utilizador(n, p);
-                FicheiroBIN fich_bin= new FicheiroBIN();
-                boolean status=fich_bin.WriteNameOfUserBinaryFile(utilizador);
+                super.getDadosJogo().setUtilizador(utilizador);
+                AdaptadorBIN adaptadorBIN= new AdaptadorBIN();
+                super.getDadosJogo().setAdaptadorBIN(adaptadorBIN);
+
+                boolean status=adaptadorBIN.getFicheiroBIN().WriteNameOfUserBinaryFile(utilizador);
+//                System.out.println(""+status);
+//                boolean status_leitura_file= fich_bin.ReadBinaryFile(utilizador);
+//                System.out.println(""+status_leitura_file);
+                boolean status_leitura= adaptadorBIN.LerFicheiro(utilizador);
                 System.out.println(""+status);
-                boolean status_leitura_file= fich_bin.ReadBinaryFile(utilizador);
-                System.out.println(""+status_leitura_file);
-               
+              
             }
 
         } catch (Exception e) {

@@ -7,8 +7,11 @@ package logicadigital.tp;
 
 import java.awt.Font;
 import java.awt.TextArea;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import static logicadigital.tp.Opcao.AND;
@@ -35,7 +38,9 @@ public class GameTab extends javax.swing.JFrame {
     ArrayList<String> OperadoresAndOrAux2 = new ArrayList<String>();
     ArrayList<String> outAux = new ArrayList<String>();
     ArrayList<String> Bin = new ArrayList<String>();
-
+    //referencia para o adaptador para escrita no ficheiro
+    AdaptadorBLIF adaptadorBLIF;
+    static ComandoFicheiros comando= new ComandoFicheiros();
     static int id_mod = 0;
     static int contador = 0;
     static int contador2 = 0;
@@ -55,10 +60,13 @@ public class GameTab extends javax.swing.JFrame {
         GameTab.f = f;
     }
 
-    public static int criaModulo() {
+    public static int criaModulo() throws IOException {
 
         int id_modulo = getF().getJogo().criaModulo();/*QUANDO CRIO UM MODULO, OBTENHO O SEU ID*/
-
+       
+        
+            
+        
         return id_modulo;
 
     }
@@ -85,7 +93,9 @@ public class GameTab extends javax.swing.JFrame {
         //Comando c = new CriaOutput(id_modulo, id_mod);
     }
 
-    public static void invocaModulo() {
+    public static void invocaModulo() throws IOException {
+         String comando_modulo= comando.executaComandoModulo();
+         System.out.println(""+comando_modulo);
         int id_modulo = getF().getJogo().criaModulo();/*QUANDO CRIO UM MODULO, OBTENHO O SEU ID*/
         int id1_input = f.getJogo().insereInputModulo(id_modulo, 1);/*QUANDO CRIO UM INPUT, OBTENHO O SEU ID*/
         int id2_input = f.getJogo().insereInputModulo(id_modulo, 1);/*QUANDO CRIO UM INPUT, OBTENHO O SEU ID*/
@@ -481,8 +491,12 @@ public class GameTab extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        invocaModulo();
+        try {
+            // TODO add your handling code here:
+            invocaModulo();
+        } catch (IOException ex) {
+            Logger.getLogger(GameTab.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -512,7 +526,8 @@ public class GameTab extends javax.swing.JFrame {
         int OR = Integer.parseInt(operadoOr);
         int Output = Integer.parseInt(output);
         jTextArea1.setEditable(false);
-
+        
+        
         if (input.equals("")) {
             JOptionPane.showMessageDialog(null, "Adicione um input");
         } else if (operadorAnd.equals("") || operadoOr.equals("")) {
@@ -522,12 +537,19 @@ public class GameTab extends javax.swing.JFrame {
         } else if (input.equals("") && operadorAnd.equals("") && operadoOr.equals("") && output.equals("")) {
             JOptionPane.showMessageDialog(null, "Tem de adicionar dados");
         }
+         
         for (int i = 1; i <= Input; i++) {
             String aux = "E";
-            aux = aux + i;
+            aux = aux + i ;
             in.add(aux);
+            try {
+                comando.executaComandoInput(in);
+            } catch (IOException ex) {
+                System.out.println(""+ex.getMessage());
+            }
+           
         }
-//ola mundo
+
         for (int i = 1;
                 i <= AND;
                 i++) {
@@ -547,6 +569,11 @@ public class GameTab extends javax.swing.JFrame {
                 i++) {
             String aux = "O";
             aux = aux + i;
+             try {
+                comando.executaComandoOutput(aux);
+            } catch (IOException ex) {
+                System.out.println(""+ex.getMessage());
+            }
             out.add(aux);
         }
 
@@ -615,8 +642,12 @@ public class GameTab extends javax.swing.JFrame {
         int numOperadorOr = Integer.parseInt(operadoOr);
         int numOutput = Integer.parseInt(output);
         int bin = 0;
-        //cria modulo
-        id_mod = criaModulo();
+        try {
+            //cria modulo
+            id_mod = criaModulo();
+        } catch (IOException ex) {
+            Logger.getLogger(GameTab.class.getName()).log(Level.SEVERE, null, ex);
+        }
         //insere Entradas/Operadores/Saidas
 //        for (int i = 0; i < numInput; i++) {
 //            criaEntradas(id_mod, bin);

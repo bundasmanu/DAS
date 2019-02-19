@@ -15,7 +15,9 @@ import java.util.List;
 public class DadosJogo {
     
     private Session sessao=null;
-    
+    Utilizador utilizador= null;
+    AdaptadorBIN adaptadorBIN=null;
+    AdaptadorBLIF adaptadorBLIF=null;
     private List<Modulo> m;
     
     /*COLOCAR AQUI UM GESTOR DE COMANDOS*/
@@ -26,10 +28,55 @@ public class DadosJogo {
         this.m=new ArrayList<Modulo>();
     }
 
+    public AdaptadorBIN getAdaptadorBIN() {
+        if(adaptadorBIN==null){
+            return adaptadorBIN= new AdaptadorBIN();
+        }
+        return adaptadorBIN;
+    }
+
+    public void setAdaptadorBIN(AdaptadorBIN adaptadorBIN) {
+        this.adaptadorBIN = adaptadorBIN;
+    }
+
+    public AdaptadorBLIF getAdaptadorBLIF() {
+         if(adaptadorBIN==null){
+            return adaptadorBLIF= new AdaptadorBLIF();
+        }
+         return adaptadorBLIF;
+       
+    }
+
+    public void setAdaptadorBLIF(AdaptadorBLIF adaptadorBLIF) {
+        this.adaptadorBLIF = adaptadorBLIF;
+    }
+    
+    
+
     public GestorComandos getCom() {
         return com;
     }
 
+    public Utilizador getUtilizador() {
+        
+        return utilizador;
+    }
+
+    public void setUtilizador(Utilizador utilizador) {
+        
+        this.utilizador = utilizador;
+    }
+
+    public List<Modulo> getM() {
+        return m;
+    }
+
+    public void setM(List<Modulo> m) {
+        this.m = m;
+    }
+
+    
+    
     public void setCom(GestorComandos com) {
         this.com = com;
     }

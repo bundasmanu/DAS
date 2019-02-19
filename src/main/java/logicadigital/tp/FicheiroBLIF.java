@@ -21,7 +21,7 @@ import java.util.logging.Logger;
  * @author carlo
  */
 public class FicheiroBLIF implements AbstractFactory {
-
+    
     public FicheiroBLIF() {
 
     }
