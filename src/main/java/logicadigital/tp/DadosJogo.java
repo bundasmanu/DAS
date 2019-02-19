@@ -14,9 +14,11 @@ import java.util.List;
  */
 public class DadosJogo {
     
-    private Session sessao=null;
+    private Session sessao=null;  
     
     private List<Modulo> m;
+    
+    
     
     /*COLOCAR AQUI UM GESTOR DE COMANDOS*/
     GestorComandos com= new GestorComandos(this);
