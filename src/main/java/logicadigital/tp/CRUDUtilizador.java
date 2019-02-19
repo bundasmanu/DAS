@@ -124,6 +124,29 @@ public class CRUDUtilizador {
         conexao.close();
         return info;
     }
+    
+    public int getIDUtilizador(String nome){
+        
+        try{
+            
+            /**/
+            PreparedStatement statement = conexao.prepareStatement("SELECT id FROM utilizador Where nome=?");
+            //statement.setQueryTimeout(30);
+            statement.setString(1, nome);
+            ResultSet rs=statement.executeQuery();
+            while(rs.next()){
+                int id_utilizador= rs.getInt(1);
+                return id_utilizador;
+            }
+            
+            return -1;
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+            return -1;
+        }
+        
+    }
 
     public boolean VerificaLogin(String username, String password) throws SQLException {
         try {

@@ -132,6 +132,16 @@ public class Operador {
                 return false;
             }
             
+            /*VERIFICAR DEPOIS SE ESTA CORRETO-->ESTA PARTE DE OS INPUTS ATUALIZAREM O SEU VALORES BINARIO, CASO ESTEJAM LIGADOS A OUTROS MODULOS*/
+            if(this.inputs.isEmpty()==false){
+                for(Input x : this.getInputs()){
+                    if(x.getOut()!=null){/*APENAS REALIZA ESTA OPERACAO, QUANDO UM OUTPUT DE OUTRO MODULO ESTA LIGADO A UM INPUT PERTENCETE A OUTRO MODULO*/
+                        x.setBinario(x.getOut().getBinario());/*VERIFICAR SE ESTA A FAZER BEM*/
+                    }    
+                }
+            }
+            /*ACABA A PARTE QUE PODE NAO ESTAR TOTALMENTE CORRETA*/
+            
             /*CASO TENHA APENAS UM INPUT*/
             if(this.getInputs().size()==1){
                 if(this.operadores.isEmpty()==false){

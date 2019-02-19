@@ -19,6 +19,7 @@ public class Session {
     public static Connection conn;
     //private static UnitOfWork unit;
     public static CRUDUtilizador utilizadorBD;
+    public static CRUDFicheiro ficheiroBD;
 
     public Session() {
 
@@ -52,6 +53,13 @@ public class Session {
         return utilizadorBD;
     }
     
-    
+    public static CRUDFicheiro getFicheiroOperacaoCRUD() throws ClassNotFoundException, SQLException{
+        
+        if(ficheiroBD==null){
+            return ficheiroBD=new CRUDFicheiro();
+        }
+        
+        return ficheiroBD;
+    }
     
 }
