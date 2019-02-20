@@ -19,11 +19,17 @@ import java.util.logging.Logger;
  *
  * @author carlo
  */
-public class FicheiroBIN implements AbstractFactory{
-
+public class FicheiroBIN{
+    
     public FicheiroBIN() {
-    }
 
+    }
+    
+    /*@Override
+    public boolean LerFicheiro(){
+        
+    }*/
+    
     //metodo para escrita num ficherio binario
     public boolean WriteNameOfUserBinaryFile(Utilizador u) throws ClassNotFoundException, SQLException {
         CRUDUtilizador crud = new CRUDUtilizador();
@@ -60,27 +66,5 @@ public class FicheiroBIN implements AbstractFactory{
 
         return true;
     }
-
-    @Override
-    public boolean ExportaFicheiro() {
-        try{
-            return true;
-        } catch(Exception e){
-            System.out.println(""+e.getMessage());
-            
-        }
-       return false;
-    }
-
-    @Override
-    public boolean ImportaFicheiro() {
-//        try {
-//            return this.ReadBinaryFile();
-//        } catch (IOException ex) {
-//           System.out.println(""+ex.getMessage());
-//        }
-        return false;
-    }
-
-   
+    
 }

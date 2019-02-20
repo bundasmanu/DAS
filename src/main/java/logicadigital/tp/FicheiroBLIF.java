@@ -20,10 +20,10 @@ import java.util.logging.Logger;
  *
  * @author carlo
  */
-public class FicheiroBLIF implements AbstractFactory {
-
+public class FicheiroBLIF {
+    
     public FicheiroBLIF() {
-
+        
     }
 
     public File CriaFicheiro() throws FileNotFoundException {
@@ -84,7 +84,7 @@ public class FicheiroBLIF implements AbstractFactory {
 
     }
 
-    @Override
+    /*@Override
     public boolean ExportaFicheiro() {
 
         PrintWriter out;
@@ -111,6 +111,6 @@ public class FicheiroBLIF implements AbstractFactory {
             System.out.println("" + e.getMessage());
         }
         return false;
-    }
+    }*/
 
 }

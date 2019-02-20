@@ -30,7 +30,7 @@ public class MenuInicial extends javax.swing.JFrame {
 
     public MenuInicial() {
         initComponents();
-        fac = new Fachada();
+        fac=fac.getFachada();
     }
 
     public Fachada getFac() {

@@ -146,11 +146,8 @@ public class LoginForm extends javax.swing.JFrame {
         String username= jTextField1.getText();
         String password= jTextField2.getText();
 
-        if(username.equals("")){
-            JOptionPane.showMessageDialog(null, "Adicione um username");
-        }
-        else if(password.equals("")){
-            JOptionPane.showMessageDialog(null,"A password nao existe ");
+        if(username.equals("") && password.equals("")){
+            JOptionPane.showMessageDialog(null, "Campos vazios");
         }
         
         getF().getJogo().login(username, password);
@@ -159,6 +156,9 @@ public class LoginForm extends javax.swing.JFrame {
             this.setVisible(false);
             new GameTab(getF()).setVisible(true);
             this.dispose();
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Password inválida");
         }
         
     }//GEN-LAST:event_btnEntrarActionPerformed

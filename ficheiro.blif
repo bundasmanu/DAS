@@ -1,8 +1,68 @@
-.model 7piVMErE2m
-.inputs 0
+.A.model pdfbQdF3Aa
+.inputs A
 .outputs 1
 .end
-.model o1859dejpf
-.inputs 0
-.outputs 1
-.end
+.model wZnsa8XehN
+.inputs E1
+.inputs E2
+.model QCRqxX6GSk
+.inputs E1
+.inputs E2
+.inputs E3
+.outputs O1
+.outputs O2
+.model pDZ4z3dMzT
+.inputs E1
+.inputs E2
+.outputs O1
+.model liN5FFBsuK
+.inputs E1
+.inputs E2
+.outputs O1
+.model QoXw49KXW4
+.inputs E1	
+.inputs E2	
+.outputs O1
+.inputs E1	
+.inputs E2	
+.outputs O1
+.inputs E1	
+.inputs E2	
+.outputs O1
+.inputs E1	
+.inputs E2	
+.outputs O1
+.inputs %s E1	
+.inputs %s E2	
+.outputs O1
+.inputs 	E1	
+.inputs 	E2	
+.outputs O1
+.inputs E1
+.inputs E2
+.outputs O1
+.inputsE1	
+.inputsE2	
+.outputs O1
+.inputs E1		
+.inputs E2		
+.outputs O1
+.inputs EE1	
+.inputs EE2	
+.outputs O1
+.outputs O1
+.inputsE1	
+.inputsE1	E1	E2	
+.outputs O1
+.inputsE0	
+.inputsE0	E0	E1	
+.inputsE0	E0	E1	E1	E2	
+.inputsE0	E0	E1	E1	E2	E2	E3	
+.outputs O1
+.inputsE1	
+.inputsE1	E2	
+.outputs O1
+.inputs E1	
+.inputs E1	E2	
+.outputs O1
+.outputs O2

@@ -130,7 +130,7 @@ public class CRUDUtilizador {
         try{
             
             /**/
-            PreparedStatement statement = conexao.prepareStatement("SELECT id FROM utilizador Where nome=?");
+            PreparedStatement statement = conexao.prepareStatement("SELECT id FROM utilizador where nome=?");
             //statement.setQueryTimeout(30);
             statement.setString(1, nome);
             ResultSet rs=statement.executeQuery();
@@ -151,29 +151,26 @@ public class CRUDUtilizador {
     public boolean VerificaLogin(String username, String password) throws SQLException {
         try {
         int status = 0;
-        String query = "select nome,pass from utilizador Where nome=? and pass=?";
+        String query = "select count(*) from utilizador where nome='"+username+"' and pass='"+password+"'";
 
         PreparedStatement stmt = conexao.prepareStatement(query);
+        ResultSet rs=stmt.executeQuery();
         
-            stmt.setString(1, username);
-            stmt.setString(2, password);
-            ResultSet rs=stmt.executeQuery();
-           
-            while(rs.next()){
-                String nome= rs.getString(1);
-                String pass= rs.getString(2);
-                System.out.println(""+nome+"\t"+pass+"\t");
-                
-            }
+        while(rs.next()){
+            status=rs.getInt(1);
+        }
+        
+        if(status==0){
+            return false;
+        }
+        
+        return true;
             
-          
-            return true; 
         } catch (Exception e) {
             System.out.println("" + e.getMessage());
             return false;
         }
 
-       
     }
     
      
