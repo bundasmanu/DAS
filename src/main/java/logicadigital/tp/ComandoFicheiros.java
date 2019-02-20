@@ -60,9 +60,9 @@ public class ComandoFicheiros {
     }
 
     //comando .model + nome gerado aleatoriamente no modulo
-    public   String executaComandoModulo() throws IOException {
+    public  String executaComandoModulo(int id_modulo) throws IOException {
         String str = "";
-        str = ".model " + this.geraStringAleatorioParaNomeModulo();
+        str = ".model " +id_modulo;
         boolean estado_escrever_comando_modulo= this.escreverComandoParaFicheiroBlif(str);
         System.out.println("Flag escrever_comando_modulo:"+estado_escrever_comando_modulo);
         return str;
@@ -79,13 +79,41 @@ public class ComandoFicheiros {
         return str;
     }
 
-    public String executaComandoOutput(String output) throws IOException {
-        String str = "";
-        str = ".outputs " + output;
-         boolean estado_escrever_comando_output= this.escreverComandoParaFicheiroBlif(str);
+    public String executaComandoOutput(List<String> lista_output) throws IOException {
+        String str = ".outputs";
+        for(String output:lista_output){
+            str += ""+output+"\t";
+        }
+        
+        boolean estado_escrever_comando_output= this.escreverComandoParaFicheiroBlif(str);
         System.out.println("Flag escrever_comando_output:"+estado_escrever_comando_output);
         return str;
     }
+    
+    public String executaComandoNamesComOperadoreInput(int id_modulo){
+        String str= ".names";
+        try {
+            
+            Modulo x=Fachada.getFachada().getJogo().getDadosJogo().getModulo(id_modulo);
+            for(Operador o: x.getOperador()){
+                for(Input i: o.getInputs()){
+                    str+= i.getId_input()+"\t";
+                }
+                str+= o.getId_operador()+"\n";
+            }
+        } catch (Exception e) {
+        }
+        return "";
+    }
+
+    public String executaComandoNamesComOperadorComOperador(List<Operador> lista_operadores,List<Operador> lista_operadores2){
+        return "";
+    }
+    
+    public String executaComandoOutputComOperador(List<Output> lista_outputs, List<Operador> lista_operadores){
+        return ""; 
+    }
+    
 
     public String executaComandoEnd() throws IOException {
         String str = "";
