@@ -38,7 +38,7 @@ public class Login extends EstadoAdapter {
                 super.getDadosJogo().setUtilizador(utilizador);
                /* AdaptadorBIN adaptadorBIN= new AdaptadorBIN();
                 super.getDadosJogo().setAdaptadorBIN(adaptadorBIN);
-
+                
                 boolean status=adaptadorBIN.getFicheiroBIN().WriteNameOfUserBinaryFile(utilizador);
 //                System.out.println(""+status);
 //                boolean status_leitura_file= fich_bin.ReadBinaryFile(utilizador);

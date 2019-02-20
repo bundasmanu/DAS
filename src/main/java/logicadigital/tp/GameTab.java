@@ -40,7 +40,7 @@ public class GameTab extends javax.swing.JFrame {
     ArrayList<String> Bin = new ArrayList<String>();
     //referencia para o adaptador para escrita no ficheiro
     AdaptadorBLIF adaptadorBLIF;
-    static ComandoFicheiros comando= new ComandoFicheiros();
+    static ComandoFicheiros comando = new ComandoFicheiros();
     static int id_mod = 0;
     static int contador = 0;
     static int contador2 = 0;
@@ -63,10 +63,8 @@ public class GameTab extends javax.swing.JFrame {
     public static int criaModulo() throws IOException {
 
         int id_modulo = getF().getJogo().criaModulo();/*QUANDO CRIO UM MODULO, OBTENHO O SEU ID*/
-       
-        
-            
-        
+
+
         return id_modulo;
 
     }
@@ -94,8 +92,9 @@ public class GameTab extends javax.swing.JFrame {
     }
 
     public static void invocaModulo() throws IOException {
-         String comando_modulo= comando.executaComandoModulo();
-         System.out.println(""+comando_modulo);
+        
+//        String comando_modulo = comando.executaComandoModulo();
+//        System.out.println("" + comando_modulo);
         int id_modulo = getF().getJogo().criaModulo();/*QUANDO CRIO UM MODULO, OBTENHO O SEU ID*/
         int id1_input = f.getJogo().insereInputModulo(id_modulo, 1);/*QUANDO CRIO UM INPUT, OBTENHO O SEU ID*/
         int id2_input = f.getJogo().insereInputModulo(id_modulo, 1);/*QUANDO CRIO UM INPUT, OBTENHO O SEU ID*/
@@ -526,8 +525,7 @@ public class GameTab extends javax.swing.JFrame {
         int OR = Integer.parseInt(operadoOr);
         int Output = Integer.parseInt(output);
         jTextArea1.setEditable(false);
-        
-        
+
         if (input.equals("")) {
             JOptionPane.showMessageDialog(null, "Adicione um input");
         } else if (operadorAnd.equals("") || operadoOr.equals("")) {
@@ -537,17 +535,17 @@ public class GameTab extends javax.swing.JFrame {
         } else if (input.equals("") && operadorAnd.equals("") && operadoOr.equals("") && output.equals("")) {
             JOptionPane.showMessageDialog(null, "Tem de adicionar dados");
         }
-         
+
         for (int i = 1; i <= Input; i++) {
             String aux = "E";
-            aux = aux + i ;
+            aux = aux + i;
             in.add(aux);
             try {
                 comando.executaComandoInput(in);
             } catch (IOException ex) {
-                System.out.println(""+ex.getMessage());
+                System.out.println("" + ex.getMessage());
             }
-           
+
         }
 
         for (int i = 1;
@@ -556,6 +554,7 @@ public class GameTab extends javax.swing.JFrame {
             String aux = "AND";
             aux = aux + i;
             and.add(aux);
+            
         }
         for (int i = 1;
                 i <= OR;
@@ -569,10 +568,11 @@ public class GameTab extends javax.swing.JFrame {
                 i++) {
             String aux = "O";
             aux = aux + i;
-             try {
-                comando.executaComandoOutput(aux);
+            out.add(aux);
+            try {
+                comando.executaComandoOutput(out);
             } catch (IOException ex) {
-                System.out.println(""+ex.getMessage());
+                System.out.println("" + ex.getMessage());
             }
             out.add(aux);
         }
