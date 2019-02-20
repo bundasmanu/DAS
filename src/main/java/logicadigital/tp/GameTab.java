@@ -108,7 +108,7 @@ public class GameTab extends javax.swing.JFrame {
     public static void criaOperadoresOr(int id_modulo) {
 
         Comando c = new CriaOperador(id_modulo, OR);
-        f.getJogo().getDadosJogo().getCom().apply(c);
+        f.getJogo().getDadosJogo().getCom().apply(c); 
     }
 
     public static void criaSaidas(int id_modulo) {
