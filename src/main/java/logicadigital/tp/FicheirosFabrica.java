@@ -10,15 +10,15 @@ package logicadigital.tp;
  * @author carlo
  */
 public class FicheirosFabrica {
-    public  AbstractFactory getTipoFicheiros(String tipo_ficheiros){
+    public  Ficheiro getTipoFicheiros(String tipo_ficheiros,DadosJogo d,String nome_file){
         if(tipo_ficheiros==null){
             return null;
         }
         if(tipo_ficheiros.equalsIgnoreCase("BLIF")){
-            return new FicheiroBLIF();
+            return new AdaptadorBLIF(d, nome_file);
         }
         else if(tipo_ficheiros.equalsIgnoreCase("BIN")){
-            return new FicheiroBIN();
+            return new AdaptadorBIN(d, nome_file);
         }
         return null;
     }

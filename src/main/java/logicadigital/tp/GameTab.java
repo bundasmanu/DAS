@@ -7,8 +7,11 @@ package logicadigital.tp;
 
 import java.awt.Font;
 import java.awt.TextArea;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import static logicadigital.tp.Opcao.AND;
@@ -37,7 +40,9 @@ public class GameTab extends javax.swing.JFrame {
     ArrayList<Operador> OperadoresAndOrAux2 = new ArrayList<Operador>();
     ArrayList<String> outAux = new ArrayList<String>();
     ArrayList<String> Bin = new ArrayList<String>();
-
+    //referencia para o adaptador para escrita no ficheiro
+    AdaptadorBLIF adaptadorBLIF;
+    static ComandoFicheiros comando = new ComandoFicheiros();
     static int id_mod = 0;
     static int contador = 0;
     static int contador2 = 0;
@@ -61,9 +66,10 @@ public class GameTab extends javax.swing.JFrame {
         GameTab.f = f;
     }
 
-    public static int criaModulo() {
+    public static int criaModulo() throws IOException {
 
         int id_modulo = getF().getJogo().criaModulo();/*QUANDO CRIO UM MODULO, OBTENHO O SEU ID*/
+
 
         return id_modulo;
 
@@ -88,8 +94,8 @@ public class GameTab extends javax.swing.JFrame {
         Comando c = new ColocaInputOperador(idmodulo, idoperador, idinput);
         f.getJogo().getDadosJogo().getCom().apply(c);
     }
-    
-     public static void LigaOperadorSaida(int idmodulo, int idoperador, int idinput) {
+
+    public static void LigaOperadorSaida(int idmodulo, int idoperador, int idinput) {
         //Comando c = new 
         //f.getJogo().getDadosJogo().getCom().apply(c);
     }
@@ -108,15 +114,18 @@ public class GameTab extends javax.swing.JFrame {
     public static void criaOperadoresOr(int id_modulo) {
 
         Comando c = new CriaOperador(id_modulo, OR);
-        f.getJogo().getDadosJogo().getCom().apply(c); 
-    }
-
-    public static void criaSaidas(int id_modulo) {
-        Comando c = new CriaOutput(id_modulo, 1);
         f.getJogo().getDadosJogo().getCom().apply(c);
     }
 
-    public static void invocaModulo() {
+    public static void criaSaidas(int id_modulo) {
+        Comando c = new CriaOutput(id_modulo);
+        f.getJogo().getDadosJogo().getCom().apply(c);
+    }
+
+    public static void invocaModulo() throws IOException {
+
+//        String comando_modulo = comando.executaComandoModulo();
+//        System.out.println("" + comando_modulo);
         int id_modulo = getF().getJogo().criaModulo();/*QUANDO CRIO UM MODULO, OBTENHO O SEU ID*/
         int id1_input = f.getJogo().insereInputModulo(id_modulo, 1);/*QUANDO CRIO UM INPUT, OBTENHO O SEU ID*/
         int id2_input = f.getJogo().insereInputModulo(id_modulo, 1);/*QUANDO CRIO UM INPUT, OBTENHO O SEU ID*/
@@ -527,8 +536,12 @@ public class GameTab extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        invocaModulo();
+        try {
+            // TODO add your handling code here:
+            invocaModulo();
+        } catch (IOException ex) {
+            Logger.getLogger(GameTab.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -571,8 +584,12 @@ public class GameTab extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Tem de adicionar dados");
         }
 
-        //cria modulo
-        id_mod = criaModulo();
+        try {
+            //cria modulo
+            id_mod = criaModulo();
+        } catch (IOException ex) {
+            Logger.getLogger(GameTab.class.getName()).log(Level.SEVERE, null, ex);
+        }
         //insere Entradas/Operadores / Saidas
         for (int i = 0; i < numInput; i++) {
             criaEntradas(id_mod, 0);

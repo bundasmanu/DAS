@@ -23,10 +23,12 @@ public class LigaOperadorOperador implements Comando{
         this.id_operador_receber=id_operador_r;
     }
     
+    @Override
     public void make(DadosJogo d){
         this.adicionaOperadorOutroOperador(d);
     }
     
+    @Override
     public void undo(DadosJogo d){
         this.retiraOperadorOutroOperador(d);
     }

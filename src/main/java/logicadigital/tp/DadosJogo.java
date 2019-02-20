@@ -12,24 +12,70 @@ import java.util.List;
  *
  * @author Armando
  */
+
 public class DadosJogo {
     
     private Session sessao=null;
-    
+    Utilizador utilizador= null;
+    private static AdaptadorBIN adaptadorBIN=null;
+    private static AdaptadorBLIF adaptadorBLIF=null;
     private List<Modulo> m;
     
     /*COLOCAR AQUI UM GESTOR DE COMANDOS*/
-    GestorComandos com= new GestorComandos(this);
-
+    GestorComandos com= null;
     
     public DadosJogo(){
         this.m=new ArrayList<Modulo>();
+        this.com=new GestorComandos(this);
+    }
+
+    public AdaptadorBIN getAdaptadorBIN(String name_file) {
+        if(adaptadorBIN==null){
+            return adaptadorBIN=new AdaptadorBIN(this,name_file);
+        }
+        return adaptadorBIN;
+    }
+
+    public void setAdaptadorBIN(AdaptadorBIN adaptadorBIN) {
+        this.adaptadorBIN = adaptadorBIN;
+    }
+
+    public AdaptadorBLIF getAdaptadorBLIF(String name_file) {
+         if(adaptadorBIN==null){
+            return adaptadorBLIF= new AdaptadorBLIF(this,name_file);
+        }
+         return adaptadorBLIF;
+       
+    }
+
+    public void setAdaptadorBLIF(AdaptadorBLIF adaptadorBLIF) {
+        this.adaptadorBLIF = adaptadorBLIF;
     }
 
     public GestorComandos getCom() {
         return com;
     }
 
+    public Utilizador getUtilizador() {
+        
+        return utilizador;
+    }
+
+    public void setUtilizador(Utilizador utilizador) {
+        
+        this.utilizador = utilizador;
+    }
+
+    public List<Modulo> getM() {
+        return m;
+    }
+
+    public void setM(List<Modulo> m) {
+        this.m = m;
+    }
+
+    
+    
     public void setCom(GestorComandos com) {
         this.com = com;
     }
@@ -78,6 +124,23 @@ public class DadosJogo {
         }
         
         return false;
+    }
+    
+    public boolean limpaTudoDadosJogo(){
+        
+        try{
+            
+            /*LIMPA TODOS OS DADOS QUE SE ENCONTRAM NO "JOGO" (DADOSJOGO)*/
+            this.com=null;
+            this.m=null;
+            
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+            return false;
+        }
+        
+        return true;
     }
     
 }

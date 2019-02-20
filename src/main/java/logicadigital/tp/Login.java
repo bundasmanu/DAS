@@ -21,6 +21,7 @@ public class Login extends EstadoAdapter {
 
     public Login(DadosJogo d) {
         super(d);
+        
     }
 
     @Override
@@ -34,19 +35,27 @@ public class Login extends EstadoAdapter {
             
             if(retorno==true){ /*Apenas se estiver tudo bem*/
                 Utilizador utilizador= new Utilizador(n, p);
-                FicheiroBIN fich_bin= new FicheiroBIN();
-                boolean status=fich_bin.WriteNameOfUserBinaryFile(utilizador);
-                System.out.println(""+status);
-                boolean status_leitura_file= fich_bin.ReadBinaryFile(utilizador);
-                System.out.println(""+status_leitura_file);
-               
+                super.getDadosJogo().setUtilizador(utilizador);
+               /* AdaptadorBIN adaptadorBIN= new AdaptadorBIN();
+                super.getDadosJogo().setAdaptadorBIN(adaptadorBIN);
+                
+                boolean status=adaptadorBIN.getFicheiroBIN().WriteNameOfUserBinaryFile(utilizador);
+//                System.out.println(""+status);
+//                boolean status_leitura_file= fich_bin.ReadBinaryFile(utilizador);
+//                System.out.println(""+status_leitura_file);
+                boolean status_leitura= adaptadorBIN.LerFicheiro(utilizador);
+                System.out.println(""+status);*/
+              
+                return new ModoGame(super.getDadosJogo());      
             }
+            
+           return new Login(super.getDadosJogo());
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            return new Login(super.getDadosJogo());
         }
-
-        return new ModoGame(super.getDadosJogo());
+        
     }
 
     @Override

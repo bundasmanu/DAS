@@ -17,11 +17,18 @@ public class Input {
     int id_input;
     private static int nextInputID = 0;
     private int binario;
+    private Output out=null;/*SO NECESSARIO QUANDO UM OUTPUT DE OUTRO MODULO ESTA LIGADO A UM INPUT*/
     
     public Input(int bin){
         this.id_input=nextInputID;
         nextInputID++;
         this.binario=bin;
+    }
+    
+    public Input(Output x){ /*SO E UTILIZADO QUANDO SE LIGA UM OUTPUT DE OUTRO MODULO AO INPUT*/
+        this.id_input=nextInputID;
+        nextInputID++; 
+        out=x;
     }
 
     public int getBinario() {
@@ -38,6 +45,14 @@ public class Input {
 
     public void setId_input(int id_input) {
         this.id_input = id_input;
+    }
+
+    public Output getOut() {
+        return out;
+    }
+
+    public void setOut(Output out) {
+        this.out = out;
     }
     
     @Override

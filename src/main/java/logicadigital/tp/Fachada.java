@@ -17,18 +17,19 @@ import java.sql.Statement;
 public class Fachada {
     
     private Jogo j;
+    private static Fachada f=null;
     
     public Fachada(){
         this.j=new Jogo();
     }
     
-    public Fachada getFachada(){
+    public static Fachada getFachada(){
         
-        if(this==null){
-            return new Fachada();
+        if(f==null){
+            return f=new Fachada();
         }
         
-        return this;
+        return f;
     }
   
     public Jogo getJogo(){
