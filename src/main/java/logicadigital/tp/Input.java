@@ -15,7 +15,7 @@ import java.util.List;
 public class Input {
     
     int id_input;
-    private static int nextInputID = 1;
+    private static int nextInputID = 0;
     private int binario;
     
     public Input(int bin){
