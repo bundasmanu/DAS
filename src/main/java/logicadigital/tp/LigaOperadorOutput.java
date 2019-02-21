@@ -31,7 +31,7 @@ public class LigaOperadorOutput implements Comando{
     
     @Override
     public void undo(DadosJogo d){
-        
+        this.retiraOutputAoOperador(d);
     }
     
     public boolean adicionaOutputAoOperador(DadosJogo d){
