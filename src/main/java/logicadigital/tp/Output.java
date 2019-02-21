@@ -12,7 +12,7 @@ package logicadigital.tp;
 public class Output {
 
     int id_input;
-    private static int nextInputID = 0;
+    private static int nextInputID = 1;
     private int binario;
 
     public Output(int bin) {/*CONSTRUTOR CRIADO PARA EFETUAR A VERIFICACAO NOS TESTES*/

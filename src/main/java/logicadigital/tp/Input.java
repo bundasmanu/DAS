@@ -15,7 +15,7 @@ import java.util.List;
 public class Input {
     
     int id_input;
-    private static int nextInputID = 0;
+    private static int nextInputID = 1;
     private int binario;
     private Output out=null;/*SO NECESSARIO QUANDO UM OUTPUT DE OUTRO MODULO ESTA LIGADO A UM INPUT*/
     
