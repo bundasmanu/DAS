@@ -11,8 +11,8 @@ import java.util.List;
  *
  * @author Armando
  */
-public class CriaOutput implements Comando{
-    
+public class CriaOutput implements Comando {
+
     private int id_modulo;
     Output outp;
     
@@ -29,15 +29,15 @@ public class CriaOutput implements Comando{
     public void undo(DadosJogo d){
         this.retiraOutputAoModuloEOperador(d);
     }
-    
-    public int adicionaOutputAoModuloEOperador(DadosJogo d){
-        
-        try{
-            
+
+    public int adicionaOutputAoModuloEOperador(DadosJogo d) {
+
+        try {
+
             /*VERIFICAR SE O MODULO EXISTE*/
-            Modulo m=d.getModulo(id_modulo);
-            
-            if(m==null){
+            Modulo m = d.getModulo(id_modulo);
+
+            if (m == null) {
                 return -1;
             }
 
@@ -53,28 +53,27 @@ public class CriaOutput implements Comando{
         }
         
     }
-    
+
     /*OPERACAO UNDO DO ADICIONA OUTPUT AO MODULO E OPERADOR*/
-    public boolean retiraOutputAoModuloEOperador(DadosJogo d){
-        
-        try{
-            
+    public boolean retiraOutputAoModuloEOperador(DadosJogo d) {
+
+        try {
+
             /*VERIFICAR SE O MODULO EXISTE*/
-            Modulo m=d.getModulo(id_modulo);
-            
-            if(m==null){
+            Modulo m = d.getModulo(id_modulo);
+
+            if (m == null) {
                 return false;
             }
             
             m.getOutputs().remove(outp);//-->BASTA REMOVER DE UM DOS LADOS, POIS A REFERENCIA É A MESMA. MAS DPS CONFIRMAR
 
             return true;
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             return false;
         }
-        
+
     }
-    
+
 }

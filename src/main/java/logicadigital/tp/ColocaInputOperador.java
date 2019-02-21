@@ -9,7 +9,7 @@ package logicadigital.tp;
  *
  * @author Armando
  */
-public class ColocaInputOperador {
+public class ColocaInputOperador implements Comando{
     
     int id_modulo;
     int id_operador;

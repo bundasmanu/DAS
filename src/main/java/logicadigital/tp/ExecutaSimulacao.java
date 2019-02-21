@@ -13,7 +13,7 @@ import static logicadigital.tp.Opcao.OR;
  *
  * @author Armando
  */
-public class ExecutaSimulacao { 
+public class ExecutaSimulacao implements Comando{ 
     
     private int id_modulo;
     
