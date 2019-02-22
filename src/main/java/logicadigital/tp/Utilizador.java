@@ -47,7 +47,7 @@ public class Utilizador implements Serializable{
     }
     
     public String toString() {
-        String str = "ID: "+ this.id+"Nome: "+ this.nome+ "Password: "+this.password;
+        String str = "Nome: "+ this.nome+ "Password: "+this.password;
         return str;
     }
     
