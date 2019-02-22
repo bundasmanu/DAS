@@ -48,28 +48,31 @@ public class FicheiroBLIF {
 
     }
 
-    public boolean LerFicheiroBlif() throws FileNotFoundException, IOException {
-        try{
-        File f = new File("C:\\Users\\carlo\\OneDrive\\Documentos\\NetBeansProjectse\\TP_DAS\\ProjetoDas-SimuladorLogicaDigital");
-        if (f.exists() && !f.isDirectory()) {
-            String linha = null;
+    public boolean LerFicheiroBlif(DadosJogo d, String name) throws FileNotFoundException, IOException {
+        try {
+            String expressao_regular="[A-Za-z]:[A-Za-z0-9\\!\\@\\#\\$\\%\\^\\&\\(\\)\\'\\;\\{\\}\\[\\]\\=\\+\\-\\_\\~\\`\\.\\\\]+";
+            
+            File f = new File(expressao_regular + name);
+            if (f.exists() && !f.isDirectory()) {
+                String linha = null;
 
-            FileReader fileReader = new FileReader(f);
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
-            while ((linha = bufferedReader.readLine()) != null) {
-                System.out.println(linha);
+                FileReader fileReader = new FileReader(f);
+                BufferedReader bufferedReader = new BufferedReader(fileReader);
+                while ((linha = bufferedReader.readLine()) != null) {
+                    System.out.println(linha);
+                }
+
+                bufferedReader.close();
+
             }
-
-            bufferedReader.close();
-          
-        }
-        }
-        catch(Exception e){
-            System.out.println(""+e.getMessage());
+        } catch (Exception e) {
+            System.out.println("" + e.getMessage());
             return false;
         }
         return true;
+
     }
+
 
     public boolean verificaSeFicheiroExiste() {
         File f = new File("C:\\Users\\carlo\\OneDrive\\Documentos\\NetBeansProjectse\\TP_DAS\\ProjetoDas-SimuladorLogicaDigital");

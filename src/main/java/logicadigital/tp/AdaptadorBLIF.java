@@ -19,13 +19,13 @@ import java.util.logging.Logger;
 public class AdaptadorBLIF extends Ficheiro{
     //instancia do tipo blif
     private FicheiroBLIF ficheiro= null;
+   // private EstrategiaLerFicheiro eLer;
     private DadosJogo dj;
     
     public AdaptadorBLIF(DadosJogo d,String nome) {
         ficheiro=new FicheiroBLIF();
         super.name_ficheiro=nome;
         dj=d;
-        super.eLer=new LerBLIF();
     }
 
     public FicheiroBLIF getFicheiro() {
@@ -44,10 +44,13 @@ public class AdaptadorBLIF extends Ficheiro{
         this.dj = dj;
     }
 
+   
+
+    
     @Override
     public boolean LerFicheiro() {
         try {
-            return eLer.lerFicheiro(d, super.name_ficheiro);
+            return ficheiro.LerFicheiroBlif(d, name_ficheiro);
         } catch (Exception ex) {
             System.out.println(""+ex.getMessage());
           return false;

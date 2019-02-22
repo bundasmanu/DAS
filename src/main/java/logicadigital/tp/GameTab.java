@@ -8,6 +8,7 @@ package logicadigital.tp;
 import java.awt.Font;
 import java.awt.TextArea;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -197,6 +198,8 @@ public class GameTab extends javax.swing.JFrame {
         jTextField12 = new javax.swing.JTextField();
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
+        jButton10 = new javax.swing.JButton();
+        jButton11 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -358,6 +361,20 @@ public class GameTab extends javax.swing.JFrame {
             }
         });
 
+        jButton10.setText("CarregarFicheiro");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
+
+        jButton11.setText("Carrega Blif Ficheiro");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -381,7 +398,7 @@ public class GameTab extends javax.swing.JFrame {
                         .addComponent(jLabel4)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 227, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -422,12 +439,16 @@ public class GameTab extends javax.swing.JFrame {
                                 .addComponent(jButton7))
                             .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextField5, javax.swing.GroupLayout.Alignment.LEADING))))
-                .addGap(0, 29, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jButton1)
                 .addGap(238, 238, 238)
                 .addComponent(jLabel5)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(32, 32, 32)
+                .addComponent(jButton11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton10)
+                .addGap(107, 107, 107))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
@@ -455,10 +476,17 @@ public class GameTab extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jLabel5))
-                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1)
+                            .addComponent(jLabel5))
+                        .addGap(26, 26, 26))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton10)
+                            .addComponent(jButton11))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jLabel7))
@@ -572,6 +600,26 @@ public class GameTab extends javax.swing.JFrame {
     private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
         String output = jTextField4.getText();
     }//GEN-LAST:event_jTextField4ActionPerformed
+
+    public static boolean VerificaFicheiroBlif() throws ClassNotFoundException, SQLException {
+        String ficheiro_gerada = "ficheiro" + ".blif";
+
+        //Ficheiro adaptadorBIN = new AdaptadorBIN(f.getJogo().getDadosJogo(), ficheiro_gerada);
+        DadosJogo j = f.getJogo().getDadosJogo();
+        AdaptadorBLIF adaptadorBLIF = j.getAdaptadorBLIF(ficheiro_gerada);
+        boolean status_leitura_blif = adaptadorBLIF.LerFicheiro();
+        System.out.println("" + status_leitura_blif);
+        //boolean status_escrita = adaptadorBIN.d.getAdaptadorBIN(ficheiro_gerada).getFicheiroBIN().WriteNameOfUserBinaryFile(u);
+        //System.out.println("" + status_escrita);
+//                boolean status=adaptadorBIN.getFicheiroBIN().WriteNameOfUserBinaryFile(utilizador);
+//                System.out.println(""+status);
+//                boolean status_leitura_file= fich_bin.ReadBinaryFile(utilizador);
+//                System.out.println(""+status_leitura_file);
+//                boolean status_leitura= adaptadorBIN.LerFicheiro(utilizador);
+//                System.out.println(""+status);
+        return true;
+
+    }
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
@@ -775,7 +823,7 @@ public class GameTab extends javax.swing.JFrame {
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         int tam = OperadoresAndOr.size();
         idoutputreceber = Integer.parseInt(jTextField12.getText());
-        
+
         if (contador2 < tam) {
             OperadoresAndOrAux2.add(OperadoresAndOr.get(contador2));
             LigaOperadorSaida(id_mod, idinputFornecer, idoutputreceber);
@@ -799,6 +847,47 @@ public class GameTab extends javax.swing.JFrame {
         new Simulacao(getF()).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton9ActionPerformed
+
+    public static boolean VerificaFicheiro(Utilizador u) throws ClassNotFoundException, SQLException {
+        Randomm rand = new Randomm();
+        String ficheiro_gerada = "historico_joao" + ".bin";
+
+        //Ficheiro adaptadorBIN = new AdaptadorBIN(f.getJogo().getDadosJogo(), ficheiro_gerada);
+        DadosJogo j = f.getJogo().getDadosJogo();
+        AdaptadorBIN adaptadorBIN = j.getAdaptadorBIN(ficheiro_gerada);
+        boolean status_leitura=adaptadorBIN.LerFicheiro();
+        System.out.println("" + status_leitura);
+        //boolean status_escrita = adaptadorBIN.d.getAdaptadorBIN(ficheiro_gerada).getFicheiroBIN().WriteNameOfUserBinaryFile(u);
+        //System.out.println("" + status_escrita);
+//                boolean status=adaptadorBIN.getFicheiroBIN().WriteNameOfUserBinaryFile(utilizador);
+//                System.out.println(""+status);
+//                boolean status_leitura_file= fich_bin.ReadBinaryFile(utilizador);
+//                System.out.println(""+status_leitura_file);
+//                boolean status_leitura= adaptadorBIN.LerFicheiro(utilizador);
+//                System.out.println(""+status);
+        return true;
+
+    }
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        try {
+            Utilizador u = f.getJogo().getDadosJogo().getUtilizador();
+            boolean estado_leitura_ficheiro = VerificaFicheiro(u);
+            
+            System.out.println("" + estado_leitura_ficheiro);
+
+        } catch (Exception e) {
+            System.out.println("" + e.getMessage());
+        }
+    }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        try {
+            boolean estado = this.VerificaFicheiroBlif();
+        } catch (Exception ex) {
+            System.out.println("" + ex.getMessage());
+        }
+    }//GEN-LAST:event_jButton11ActionPerformed
 
     public void DesenhaEsquema() {
         jTextField5.setEditable(false);
@@ -934,6 +1023,8 @@ public class GameTab extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;

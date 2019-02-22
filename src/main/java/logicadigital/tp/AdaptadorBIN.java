@@ -19,13 +19,13 @@ public class AdaptadorBIN extends Ficheiro {
 
     private FicheiroBIN ficheiroBIN = null;
     private DadosJogo dj;
-    private EstrategiaLerFicheiro eLer;
+  
 
     public AdaptadorBIN(DadosJogo d, String nome) { /*TEM DE SE PASSAR POR PARAMETRO UM FICHEIRO*/
         ficheiroBIN= new FicheiroBIN();
         super.name_ficheiro=nome;
         dj=d;
-        eLer=new LerBIN();
+       
     }
 
     public FicheiroBIN getFicheiroBIN() {
@@ -44,18 +44,11 @@ public class AdaptadorBIN extends Ficheiro {
         this.dj = dj;
     }
 
-    public EstrategiaLerFicheiro geteLer() {
-        return eLer;
-    }
-
-    public void seteLer(EstrategiaLerFicheiro eLer) {
-        this.eLer = eLer;
-    }
-    
+   
     @Override
     public boolean LerFicheiro() {
        try{
-           return eLer.lerFicheiro(this.getDj(), this.name_ficheiro);
+           return ficheiroBIN.ReadBinaryFile(d, name_ficheiro);
        } catch(Exception e){
            System.out.println(""+e.getMessage());
            return false;
