@@ -85,7 +85,7 @@ public class Output {
     @Override
     public String toString() {
 
-        return "\nOutput: " + this.binario + "\n";
+        return "Output: " + this.id_input + "  " + " Binario: " + this.getBinario() + "\n";
 
     }
 

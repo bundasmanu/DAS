@@ -25,8 +25,11 @@ public class Simulacao extends javax.swing.JFrame {
     Simulacao(Fachada ff) {
         initComponents();
         f = ff;
-        int id = f.getJogo().getDadosJogo().getListaModulo().get(0).id_modulo;
-        jTextArea2.setText(f.getJogo().getDadosJogo().getModulo(id).toString());
+        for (int i = 0; i < f.getJogo().getDadosJogo().getListaModulo().size(); i++) {
+            int id = f.getJogo().getDadosJogo().getListaModulo().get(i).id_modulo;
+            jTextArea2.append(f.getJogo().getDadosJogo().getModulo(id).toString() + "\n");
+        }
+
     }
 
     /**
@@ -44,6 +47,8 @@ public class Simulacao extends javax.swing.JFrame {
         jTextArea1 = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -65,6 +70,10 @@ public class Simulacao extends javax.swing.JFrame {
         jTextArea2.setRows(5);
         jScrollPane2.setViewportView(jTextArea2);
 
+        jLabel2.setText("Antes");
+
+        jLabel3.setText("Depois");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -73,26 +82,33 @@ public class Simulacao extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(265, 265, 265)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1)
-                            .addComponent(jLabel1)))
+                        .addComponent(jButton1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(73, 73, 73)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(293, 293, 293)
+                        .addComponent(jLabel1)))
                 .addContainerGap(110, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addGap(7, 7, 7)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(jLabel3)
+                .addGap(3, 3, 3)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)
-                .addGap(31, 31, 31)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
                 .addGap(20, 20, 20))
         );
@@ -102,11 +118,14 @@ public class Simulacao extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // iniciar simulacao
-        int id_mod = f.getJogo().getDadosJogo().getListaModulo().get(0).id_modulo;
-        Comando c = new ExecutaSimulacao(id_mod);
-        f.getJogo().getDadosJogo().getCom().apply(c);
-        //listar resultado simulacao
-        jTextArea1.setText(f.getJogo().getDadosJogo().getModulo(id_mod).toString());
+        for (int i = 0; i < f.getJogo().getDadosJogo().getListaModulo().size(); i++) {
+            int id_mod = f.getJogo().getDadosJogo().getListaModulo().get(i).id_modulo;
+            Comando c = new ExecutaSimulacao(id_mod);
+            f.getJogo().getDadosJogo().getCom().apply(c);
+            //listar resultado simulacao
+            jTextArea1.append(f.getJogo().getDadosJogo().getModulo(id_mod).toString() + "\n");
+        }
+
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -148,6 +167,8 @@ public class Simulacao extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;

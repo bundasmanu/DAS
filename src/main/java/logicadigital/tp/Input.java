@@ -13,22 +13,23 @@ import java.util.List;
  * @author Armando
  */
 public class Input {
-    
+
     int id_input;
     private static int nextInputID = 1;
     private int binario;
-    private Output out=null;/*SO NECESSARIO QUANDO UM OUTPUT DE OUTRO MODULO ESTA LIGADO A UM INPUT*/
-    
-    public Input(int bin){
-        this.id_input=nextInputID;
+    private Output out = null;/*SO NECESSARIO QUANDO UM OUTPUT DE OUTRO MODULO ESTA LIGADO A UM INPUT*/
+
+    public Input(int bin) {
+        this.id_input = nextInputID;
         nextInputID++;
-        this.binario=bin;
+        this.binario = bin;
     }
-    
-    public Input(Output x){ /*SO E UTILIZADO QUANDO SE LIGA UM OUTPUT DE OUTRO MODULO AO INPUT*/
-        this.id_input=nextInputID;
-        nextInputID++; 
-        out=x;
+
+    public Input(Output x) {
+        /*SO E UTILIZADO QUANDO SE LIGA UM OUTPUT DE OUTRO MODULO AO INPUT*/
+        this.id_input = nextInputID;
+        nextInputID++;
+        out = x;
     }
 
     public int getBinario() {
@@ -54,46 +55,46 @@ public class Input {
     public void setOut(Output out) {
         this.out = out;
     }
-    
+
     @Override
-    public int hashCode(){
-        
-        int hash=17;
-        
-        hash+=this.id_input;
-        
+    public int hashCode() {
+
+        int hash = 17;
+
+        hash += this.id_input;
+
         return hash;
     }
-    
+
     @Override
-    public boolean equals(Object obj){
-        
-        if(obj==null){
+    public boolean equals(Object obj) {
+
+        if (obj == null) {
             return false;
         }
-        
-        if(obj instanceof Input ==false){
+
+        if (obj instanceof Input == false) {
             return false;
         }
-        
-        if(this==obj){
+
+        if (this == obj) {
             return true;
         }
-        
-        Input inp= (Input) obj;
-        
-        if(this.id_input!=inp.getId_input()){
+
+        Input inp = (Input) obj;
+
+        if (this.id_input != inp.getId_input()) {
             return false;
         }
-        
+
         return true;
     }
-    
+
     @Override
-    public String toString(){
-        
-        return this.getBinario()+"\n";
-        
+    public String toString() {
+
+        return "Input: " + this.getId_input() + "  " + " Binario: " + this.getBinario() + "\n";
+
     }
-    
+
 }
