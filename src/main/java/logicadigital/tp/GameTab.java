@@ -1004,7 +1004,8 @@ public class GameTab extends javax.swing.JFrame {
             auxOperadores += " " + or.get(i).id_operador;
         }
 
-        jTextField7.setText(auxOperadores);
+        jTextField7.setText(auxOperadores); 
+        
     }
 
     /**
