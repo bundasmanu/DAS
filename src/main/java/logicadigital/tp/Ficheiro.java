@@ -12,7 +12,7 @@ package logicadigital.tp;
  */
 public abstract class Ficheiro {
     
-    EstrategiaLerFicheiro eLer;
+
     public DadosJogo d;
     String name_ficheiro;
     

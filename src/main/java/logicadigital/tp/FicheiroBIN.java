@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,23 +20,22 @@ import java.util.logging.Logger;
  *
  * @author carlo
  */
-public class FicheiroBIN{
-    
+public class FicheiroBIN {
+
     public FicheiroBIN() {
 
     }
-    
+
     /*@Override
     public boolean LerFicheiro(){
         
     }*/
-    
     //metodo para escrita num ficherio binario
     public boolean WriteNameOfUserBinaryFile(Utilizador u) throws ClassNotFoundException, SQLException {
         CRUDUtilizador crud = new CRUDUtilizador();
         //if (crud.VerificaLogin(u.getNome(), u.getPassword()) == true) {
         try {
-            FileOutputStream fos = new FileOutputStream("historico_"+u.getNome()+".bin");
+            FileOutputStream fos = new FileOutputStream("historico_" + u.getNome() + ".bin");
             ObjectOutputStream ois = new ObjectOutputStream(fos);
             ois.writeObject(u);
             System.out.println("O nome do utilizador foi guardado num ficheiro");
@@ -48,23 +48,28 @@ public class FicheiroBIN{
     }
 
     //metodo para leitura de um ficheiro binario
-    public boolean ReadBinaryFile(Utilizador u) throws FileNotFoundException, IOException {
-        FileInputStream ficheiro = new FileInputStream("historico_"+u.getNome()+".bin");
-        ObjectInputStream reader = new ObjectInputStream(ficheiro);
+    public boolean ReadBinaryFile(DadosJogo d, String name) throws FileNotFoundException, IOException {
 
-        while (true) {
-            try {
-                Utilizador a = (Utilizador) reader.readObject();
-                System.out.println("O objeto foi lido do ficheiro" + a.toString());
-                reader.close();
-
-            } catch (Exception e) {
-                System.err.println("" + e.getMessage());
-                break;
+        try {
+            FileInputStream ficheiro;
+            ficheiro = new FileInputStream(name);
+            ObjectInputStream reader = new ObjectInputStream(ficheiro);
+            
+            List<Modulo> lista_modulos = null;
+            Object x;
+            x = (Object) reader.readObject();
+            lista_modulos = (List<Modulo>) x;
+            for (int i = 0; i < lista_modulos.size(); i++) {
+                System.out.println("O objeto foi lido do ficheiro de nome" + lista_modulos.get(i).toString());
             }
-        }
 
-        return true;
+            reader.close();
+
+            return true;
+
+        } catch (Exception ex) {
+            System.out.println("" + ex.getMessage());
+            return false;
+        }
     }
-    
 }
