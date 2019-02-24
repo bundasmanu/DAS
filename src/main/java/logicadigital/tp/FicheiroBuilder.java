@@ -10,6 +10,8 @@ package logicadigital.tp;
  * @author carlo
  */
 public abstract class FicheiroBuilder {
+    
+    EstrategiaEscrever eEscrever;
     //retorna o tipo de ficheiro builder
     public static FicheiroBuilder getFicheiroBuilder(String tipo_ficheiro_builder){
         if(tipo_ficheiro_builder.equals("BuilderBLIF")){
@@ -20,7 +22,10 @@ public abstract class FicheiroBuilder {
         }
         return null;
     }
+    
+    abstract public FicheiroBuilder setInfo_Ficheiro(Object x);
     public abstract boolean exportaFicheiro();
     public abstract boolean gravaFicheiro();
+    public abstract FicheiroBuilder build() throws Exception;
     
 }
