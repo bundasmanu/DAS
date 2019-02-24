@@ -12,7 +12,7 @@ package logicadigital.tp;
 public class BuilderBIN extends FicheiroBuilder{
 
     @Override
-    public boolean exportaFicheiro() {
+    public boolean exportaFicheiro() { 
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
