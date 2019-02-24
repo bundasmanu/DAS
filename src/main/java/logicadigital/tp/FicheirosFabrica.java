@@ -10,7 +10,7 @@ package logicadigital.tp;
  * @author carlo
  */
 public class FicheirosFabrica {
-    public  Ficheiro getTipoFicheiros(String tipo_ficheiros,DadosJogo d,String nome_file){
+    public static Ficheiro getTipoFicheiros(String tipo_ficheiros,DadosJogo d,String nome_file){
         if(tipo_ficheiros==null){
             return null;
         }

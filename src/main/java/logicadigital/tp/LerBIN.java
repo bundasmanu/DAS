@@ -11,6 +11,7 @@ package logicadigital.tp;
  */
 public class LerBIN implements EstrategiaLerFicheiro{
     
+   
     @Override
     public boolean lerFicheiro(DadosJogo d, String name){
         
