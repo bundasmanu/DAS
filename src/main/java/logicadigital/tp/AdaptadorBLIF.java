@@ -32,7 +32,7 @@ public class AdaptadorBLIF extends Ficheiro{
         return ficheiro;
     }
 
-    public void setFicheiro(FicheiroBLIF ficheiro) {
+    public void setFicheiro(FicheiroBLIF ficheiro) { 
         this.ficheiro = ficheiro;
     }
 
