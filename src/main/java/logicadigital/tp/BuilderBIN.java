@@ -11,6 +11,10 @@ package logicadigital.tp;
  */
 public class BuilderBIN extends FicheiroBuilder{
 
+    public BuilderBIN(){
+        eEscrever= new EscritaBIN();
+    }
+    
     @Override
     public boolean exportaFicheiro() { 
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -19,6 +23,17 @@ public class BuilderBIN extends FicheiroBuilder{
     @Override
     public boolean gravaFicheiro() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public FicheiroBuilder build() throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public FicheiroBuilder setInfo_Ficheiro(Object x) {
+        eEscrever.escreveFicheiro(x);return null;
+        //return FicheiroBuilder.getFicheiroBuilder("BuilderBLIF");
     }
     
 }
