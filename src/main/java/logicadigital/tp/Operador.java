@@ -209,7 +209,7 @@ public class Operador {
 
         String info_operador="";
         
-        info_operador+="\nOperador: "+this.getQual()+"\n";
+        info_operador+="Operador: "+this.getQual()+"\n";
         
         return info_operador;
     }

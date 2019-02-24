@@ -17,8 +17,8 @@ public class DadosJogo {
     
     private Session sessao=null;
     Utilizador utilizador= null;
-    private static AdaptadorBIN adaptadorBIN=null;
-    private static AdaptadorBLIF adaptadorBLIF=null;
+    /**/
+    private FicheirosFabrica fich;
     private List<Modulo> m;
     
     /*COLOCAR AQUI UM GESTOR DE COMANDOS*/
@@ -27,30 +27,17 @@ public class DadosJogo {
     public DadosJogo(){
         this.m=new ArrayList<Modulo>();
         this.com=new GestorComandos(this);
+        this.fich=new FicheirosFabrica();
     }
 
-    public AdaptadorBIN getAdaptadorBIN(String name_file) {
-        if(adaptadorBIN==null){
-            return adaptadorBIN=new AdaptadorBIN(this,name_file);
-        }
-        return adaptadorBIN;
+    public FicheirosFabrica getFich() {
+        return fich;
     }
 
-    public void setAdaptadorBIN(AdaptadorBIN adaptadorBIN) {
-        this.adaptadorBIN = adaptadorBIN;
+    public void setFich(FicheirosFabrica fich) {
+        this.fich = fich;
     }
 
-    public AdaptadorBLIF getAdaptadorBLIF(String name_file) {
-         if(adaptadorBIN==null){
-            return adaptadorBLIF= new AdaptadorBLIF(this,name_file);
-        }
-         return adaptadorBLIF;
-       
-    }
-
-    public void setAdaptadorBLIF(AdaptadorBLIF adaptadorBLIF) {
-        this.adaptadorBLIF = adaptadorBLIF;
-    }
 
     public GestorComandos getCom() {
         return com;

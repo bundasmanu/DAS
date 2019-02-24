@@ -48,6 +48,7 @@ public class GameTab extends javax.swing.JFrame {
     static int contador = 0;
     static int contador2 = 0;
     static int contador3 = 0;
+    static int conta = 0;
     static int idinput = 0;
     static int idinput2 = 0;
     static int idinputFornecer = 0;
@@ -103,7 +104,7 @@ public class GameTab extends javax.swing.JFrame {
     }
 
     public static void LigaOperadorOperador(int idModulo, int idFornecer, int idReceber) {
-        Comando c = new LigaOperadorOperador(idModulo, idFornecer, idFornecer);
+        Comando c = new LigaOperadorOperador(idModulo, idFornecer, idReceber);
         f.getJogo().getDadosJogo().getCom().apply(c);
     }
 
@@ -605,10 +606,10 @@ public class GameTab extends javax.swing.JFrame {
         String ficheiro_gerada = "ficheiro" + ".blif";
 
         //Ficheiro adaptadorBIN = new AdaptadorBIN(f.getJogo().getDadosJogo(), ficheiro_gerada);
-        DadosJogo j = f.getJogo().getDadosJogo();
+        /*DadosJogo j = f.getJogo().getDadosJogo();
         AdaptadorBLIF adaptadorBLIF = j.getAdaptadorBLIF(ficheiro_gerada);
         boolean status_leitura_blif = adaptadorBLIF.LerFicheiro();
-        System.out.println("" + status_leitura_blif);
+        System.out.println("" + status_leitura_blif);*/
         //boolean status_escrita = adaptadorBIN.d.getAdaptadorBIN(ficheiro_gerada).getFicheiroBIN().WriteNameOfUserBinaryFile(u);
         //System.out.println("" + status_escrita);
 //                boolean status=adaptadorBIN.getFicheiroBIN().WriteNameOfUserBinaryFile(utilizador);
@@ -634,7 +635,7 @@ public class GameTab extends javax.swing.JFrame {
 
         jTextArea1.setEditable(false);
         jButton2.setEnabled(false);
-        jButton5.setEnabled(false);
+        //jButton5.setEnabled(false);
 
         if (input.equals("")) {
             JOptionPane.showMessageDialog(null, "Adicione um input");
@@ -727,6 +728,7 @@ public class GameTab extends javax.swing.JFrame {
         }
 
         DesenhaEsquema1();
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
@@ -803,16 +805,22 @@ public class GameTab extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        //atualizar vetor inAUx 
+        //atualizar vetor inAux 
         int tam = in.size();
         int op = Integer.parseInt(jTextField6.getText());
         contador++;
 
-        if (contador < tam) {
-            inAux.add(getF().getJogo().getDadosJogo().getModulo(id_mod).getInputs().get(contador));
-            LigaEntradaOperador(id_mod, op, idinput2);
+        if (conta < tam) {
+
+            LigaEntradaOperador(id_mod, op, idinput2); //idinput id da label da entrada
+            if (conta < tam - 1) {
+                inAux.add(getF().getJogo().getDadosJogo().getModulo(id_mod).getInputs().get(conta + 1));
+            }
             DesenhaEsquema();
             jTextField6.setText("");
+            
+            conta++;
+
         }
         if (contador >= tam) {
             jButton7.setEnabled(false);
@@ -837,12 +845,34 @@ public class GameTab extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        id_mod = 0;
+        contador = 0;
+        conta = 0;
+        contador2 = 0;
+        contador3 = 0;
+        //idinput = 0;
+        //idinput2 = 0;
+        idinputFornecer = 0;
+        idinputReceber = 0;
+        idoutputreceber = 0;
+        in.clear();
+        and.clear();
+        or.clear();
+        out.clear();
+        operador.clear();
+        inAux.clear();
+        inAux2.clear();
+        OperadoresAndOr.clear();
+        OperadoresAndOrAux.clear();
+        OperadoresAndOrAux2.clear();
+        outAux.clear();
+        Bin.clear();
         this.setVisible(false);
         new GameTab(getF()).setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        
+
         this.setVisible(false);
         new Simulacao(getF()).setVisible(true);
         this.dispose();
@@ -853,10 +883,10 @@ public class GameTab extends javax.swing.JFrame {
         String ficheiro_gerada = "historico_joao" + ".bin";
 
         //Ficheiro adaptadorBIN = new AdaptadorBIN(f.getJogo().getDadosJogo(), ficheiro_gerada);
-        DadosJogo j = f.getJogo().getDadosJogo();
+        /*DadosJogo j = f.getJogo().getDadosJogo();
         AdaptadorBIN adaptadorBIN = j.getAdaptadorBIN(ficheiro_gerada);
         boolean status_leitura=adaptadorBIN.LerFicheiro();
-        System.out.println("" + status_leitura);
+        System.out.println("" + status_leitura);*/
         //boolean status_escrita = adaptadorBIN.d.getAdaptadorBIN(ficheiro_gerada).getFicheiroBIN().WriteNameOfUserBinaryFile(u);
         //System.out.println("" + status_escrita);
 //                boolean status=adaptadorBIN.getFicheiroBIN().WriteNameOfUserBinaryFile(utilizador);
@@ -974,7 +1004,8 @@ public class GameTab extends javax.swing.JFrame {
             auxOperadores += " " + or.get(i).id_operador;
         }
 
-        jTextField7.setText(auxOperadores);
+        jTextField7.setText(auxOperadores); 
+        
     }
 
     /**
