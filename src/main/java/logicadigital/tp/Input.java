@@ -24,6 +24,10 @@ public class Input {
         nextInputID++;
         this.binario = bin;
     }
+    
+   public Input(){
+       
+   }
 
     public Input(Output x) {
         /*SO E UTILIZADO QUANDO SE LIGA UM OUTPUT DE OUTRO MODULO AO INPUT*/

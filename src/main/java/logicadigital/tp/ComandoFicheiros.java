@@ -40,7 +40,8 @@ public class ComandoFicheiros {
 //        }
 //
 //    }
-
+    
+  
     public boolean escreverComandoParaFicheiroBlif(String comando) throws IOException {
         try {
             //com o true é possivel fazer o append do ficheiro,acrescentar info ao mesmo

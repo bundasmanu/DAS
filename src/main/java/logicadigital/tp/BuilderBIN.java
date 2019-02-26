@@ -163,5 +163,7 @@ public class BuilderBIN extends FicheiroBuilder{
         }
         throw new Exception("Nao pode construir o ficheiro");
     }
+
+    
     
 }

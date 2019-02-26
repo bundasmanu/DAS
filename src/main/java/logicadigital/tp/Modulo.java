@@ -27,6 +27,13 @@ public class Modulo {
         this.operador=new ArrayList<Operador>();
         this.outputs=new ArrayList<Output>();
     }
+    
+    public Modulo(int id_modulo){
+        this.id_modulo=id_modulo;
+        this.inputs=new ArrayList<Input>();
+        this.operador=new ArrayList<Operador>();
+        this.outputs=new ArrayList<Output>();
+    }
 
     public List<Input> getInputs() {
         return inputs;
