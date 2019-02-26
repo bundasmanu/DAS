@@ -44,9 +44,6 @@ public class AdaptadorBLIF extends Ficheiro{
         this.dj = dj;
     }
 
-   
-
-    
     @Override
     public boolean LerFicheiro() {
         try {
