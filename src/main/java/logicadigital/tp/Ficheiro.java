@@ -17,5 +17,6 @@ public abstract class Ficheiro {
     String name_ficheiro;
     
     public abstract boolean LerFicheiro();
+   
     
 }

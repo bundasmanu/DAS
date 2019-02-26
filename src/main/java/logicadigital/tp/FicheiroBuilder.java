@@ -22,10 +22,11 @@ public abstract class FicheiroBuilder {
         }
         return null;
     }
-    
+   // abstract public boolean importaFicheiro(String nome_ficheiro);
     abstract public FicheiroBuilder setInfo_Ficheiro(Object x);
     public abstract boolean exportaFicheiro();
     public abstract boolean gravaFicheiro();
+    
     public abstract FicheiroBuilder build() throws Exception;
     
 }

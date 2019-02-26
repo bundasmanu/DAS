@@ -5,6 +5,10 @@
  */
 package logicadigital.tp;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+
 /**
  *
  * @author carlo
@@ -35,5 +39,7 @@ public class BuilderBIN extends FicheiroBuilder{
         eEscrever.escreveFicheiro(x);return null;
         //return FicheiroBuilder.getFicheiroBuilder("BuilderBLIF");
     }
+
+    
     
 }

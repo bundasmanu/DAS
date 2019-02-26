@@ -605,17 +605,23 @@ public class GameTab extends javax.swing.JFrame {
     public static boolean VerificaFicheiroBlif() throws ClassNotFoundException, SQLException {
         String ficheiro_gerada = "ficheiro" + ".blif";
 
-        //Ficheiro adaptadorBIN = new AdaptadorBIN(f.getJogo().getDadosJogo(), ficheiro_gerada);
-        /*DadosJogo j = f.getJogo().getDadosJogo();
-        AdaptadorBLIF adaptadorBLIF = j.getAdaptadorBLIF(ficheiro_gerada);
-        boolean status_leitura_blif = adaptadorBLIF.LerFicheiro();
-        System.out.println("" + status_leitura_blif);*/
-        //boolean status_escrita = adaptadorBIN.d.getAdaptadorBIN(ficheiro_gerada).getFicheiroBIN().WriteNameOfUserBinaryFile(u);
-        //System.out.println("" + status_escrita);
-//                boolean status=adaptadorBIN.getFicheiroBIN().WriteNameOfUserBinaryFile(utilizador);
-//                System.out.println(""+status);
-//                boolean status_leitura_file= fich_bin.ReadBinaryFile(utilizador);
-//                System.out.println(""+status_leitura_file);
+        Ficheiro adaptadorBIN = new AdaptadorBIN(f.getJogo().getDadosJogo(), ficheiro_gerada);
+        DadosJogo j = f.getJogo().getDadosJogo();
+        FicheirosFabrica fich= new FicheirosFabrica();
+        Ficheiro fff= fich.getTipoFicheiros("BLIF", j, ficheiro_gerada);
+        System.out.println(""+fff);
+        boolean estado_leitura=fff.LerFicheiro();
+        System.out.println(""+estado_leitura);
+        //AdaptadorBLIF adaptadorBLIF= j.getFich();
+        //AdaptadorBLIF adaptadorBLIF = j.getAdaptadorBLIF(ficheiro_gerada);
+//        boolean status_leitura_blif =adaptadorBLIF.LerFicheiro();
+//        System.out.println("" + status_leitura_blif);
+//        boolean status_escrita = adaptadorBIN.d.getAdaptadorBIN(ficheiro_gerada).getFicheiroBIN().WriteNameOfUserBinaryFile(u);
+//        System.out.println("" + status_escrita);
+//        boolean status=adaptadorBIN.getFicheiroBIN().WriteNameOfUserBinaryFile(utilizador);
+//        System.out.println(""+status);
+//        boolean status_leitura_file= fich_bin.ReadBinaryFile(utilizador);
+//    System.out.println(""+status_leitura_file);
 //                boolean status_leitura= adaptadorBIN.LerFicheiro(utilizador);
 //                System.out.println(""+status);
         return true;
@@ -881,7 +887,14 @@ public class GameTab extends javax.swing.JFrame {
     public static boolean VerificaFicheiro(Utilizador u) throws ClassNotFoundException, SQLException {
         Randomm rand = new Randomm();
         String ficheiro_gerada = "historico_joao" + ".bin";
-
+        Ficheiro adaptadorBlif = new AdaptadorBIN(f.getJogo().getDadosJogo(), ficheiro_gerada);
+        DadosJogo j = f.getJogo().getDadosJogo();
+        FicheirosFabrica fich= new FicheirosFabrica();
+        Ficheiro fff= fich.getTipoFicheiros("BIN", j, ficheiro_gerada);
+        System.out.println(""+fff);
+        boolean estado_leitura=fff.LerFicheiro();
+        System.out.println(""+estado_leitura);
+        
         //Ficheiro adaptadorBIN = new AdaptadorBIN(f.getJogo().getDadosJogo(), ficheiro_gerada);
         /*DadosJogo j = f.getJogo().getDadosJogo();
         AdaptadorBIN adaptadorBIN = j.getAdaptadorBIN(ficheiro_gerada);

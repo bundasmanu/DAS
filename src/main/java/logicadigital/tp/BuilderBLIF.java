@@ -36,5 +36,5 @@ public class BuilderBLIF extends FicheiroBuilder{
         return null;
        // return FicheiroBuilder.getFicheiroBuilder("BuilderBIN");
     }
-    
+
 }
