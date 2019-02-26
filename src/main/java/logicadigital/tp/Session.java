@@ -50,7 +50,7 @@ public class Session {
             return utilizadorBD = new CRUDUtilizador();
         }
 
-        return utilizadorBD; 
+        return utilizadorBD;  
     }
     
     public static CRUDFicheiro getFicheiroOperacaoCRUD() throws ClassNotFoundException, SQLException{
