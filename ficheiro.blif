@@ -1,4 +1,14 @@
-.model Teste
-.inputs A1 A2 A3
-.outputs E1 E2 E3
+.model 1
+.inputs 1 2 3
+.outputs 1 2
+.names 1 2 1
+11 1
+.names 2 3 2
+11 1
+.names 1 2 3
+1 1 1
+.names 1 1
+1 1
+.names 3 2
+1 1
 .end

@@ -165,12 +165,31 @@ public class FicheiroBLIF {
     }
         return true;
     }
+    
+    //verificar quantos comandos .names existem no ficheiro
+    public int VerificaQuantosNames(String nome_ficheiro) throws FileNotFoundException, IOException{
+        int conta=0;
+        File f= new File("D:\\"+nome_ficheiro); 
+        if (f.exists() && !f.isDirectory()) {
+            String linha = "";
+            
+            FileReader fileReader = new FileReader(f);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            while ((linha = bufferedReader.readLine()) != null) {
+                if(linha.contains(".names")){
+                    conta++;
+                }
+            }
+        }
+         return conta;
+    }
 
     
     public boolean LerFicheiroBlif(DadosJogo d, String name) throws FileNotFoundException, IOException {
         try {
             String expressao_regular = "([A-Z|a-z]:\\\\[^*|\"<>?\\n]*)|(\\\\\\\\.*?\\\\.*)";
             int flag_controlo = 0;
+            int num_names=0;
             File f = new File("D:\\" + name);
             List<Integer> lista_int = new ArrayList<Integer>();
             List<Integer> lista_names_inputs = new ArrayList<Integer>();
@@ -207,8 +226,9 @@ public class FicheiroBLIF {
                             lista_outputs.add(Integer.parseInt(a[i]));
                         }
                         LeComandoOutput(Integer.parseInt(last), lista_outputs);
+                        num_names=VerificaQuantosNames(name);
                     } else if (linha.contains(".names") && flag_controlo == 0) {
-                        for (int i = 0; i < lista_int.size() - 1; i++) {
+                        for (int i = 0; i < num_names - lista_outputs.size(); i++) {
                             String l = linha.substring(linha.lastIndexOf(" ") + linha.length());
                             String[] s = l.split(" ");
                             for (int j = 0; j < s.length - 1; j++) {
@@ -229,7 +249,7 @@ public class FicheiroBLIF {
                             LeNamesInputOperador(Integer.parseInt(last), lista_int, operador, lista_binarios, valor);
                             bufferedReader.readLine();
                         }
-                        flag_controlo = 1;
+                        flag_controlo = 2;
                     } else if (linha.contains(".names") && flag_controlo == 1) {
                         int x = linha.trim().split("\\s+").length;
                         String ultimo = linha.substring(linha.lastIndexOf(" ") + linha.lastIndexOf(linha.length()));
