@@ -1,4 +1,4 @@
-6package logicadigital.tp;
+package logicadigital.tp;
 
 
 import java.sql.SQLException;
