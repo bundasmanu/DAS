@@ -20,9 +20,11 @@ import static logicadigital.tp.Opcao.AND;
 public class BuilderBLIF extends FicheiroBuilder{
     
     FileWriter f=null;
+    File ficheiro=null;
     
     public BuilderBLIF() throws IOException{
-        f=new FileWriter("historico" +new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS")+ ".blif",true);
+        ficheiro=new File("historico" +new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS")+ ".blif");
+        f=new FileWriter(ficheiro,true);
     }
 
     public FileWriter getF() {
@@ -35,7 +37,10 @@ public class BuilderBLIF extends FicheiroBuilder{
 
     @Override
     public FicheiroBuilder build() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(ficheiro.exists()==true && ficheiro.length()>0){/*SE O FICHEIRO EXISTE E SE ESTE NAO ESTA VAZIO*/
+            return this;
+        }
+        throw new Exception("\nO ficheiro nao esta em condicoes de ser construido\n");
     }
 
     @Override

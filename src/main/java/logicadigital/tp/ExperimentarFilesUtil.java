@@ -136,7 +136,7 @@ public class ExperimentarFilesUtil extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String nome_ficheiro_seleccionaod=jList1.getSelectedValue(); 
+        String nome_ficheiro_seleccionaod=jList1.getSelectedValue();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
