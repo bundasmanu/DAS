@@ -67,7 +67,7 @@ public class Simulacao extends javax.swing.JFrame {
 
         jLabel1.setText("Simulacao");
 
-        jButton1.setBackground(new java.awt.Color(51, 102, 0));
+        jButton1.setBackground(new java.awt.Color(0, 204, 0));
         jButton1.setText("Start");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -139,10 +139,11 @@ public class Simulacao extends javax.swing.JFrame {
                         .addGap(293, 293, 293)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(284, 284, 284)
+                        .addComponent(jButton1))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(265, 265, 265)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton5)
-                            .addComponent(jButton1))))
+                        .addComponent(jButton5)))
                 .addContainerGap(73, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -186,6 +187,10 @@ public class Simulacao extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // iniciar simulacao
+
+        Modulo y = f.getJogo().getDadosJogo().getModulo(1);
+        Modulo y1 = f.getJogo().getDadosJogo().getModulo(2);
+
         for (int i = 0; i < f.getJogo().getDadosJogo().getListaModulo().size(); i++) {
             int id_mod = f.getJogo().getDadosJogo().getListaModulo().get(i).id_modulo;
             Comando c = new ExecutaSimulacao(id_mod);
