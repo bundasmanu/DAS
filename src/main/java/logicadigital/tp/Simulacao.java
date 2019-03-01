@@ -81,9 +81,6 @@ public class Simulacao extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(265, 265, 265)
-                        .addComponent(jButton1))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(73, 73, 73)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
@@ -92,7 +89,10 @@ public class Simulacao extends javax.swing.JFrame {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(293, 293, 293)
-                        .addComponent(jLabel1)))
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(284, 284, 284)
+                        .addComponent(jButton1)))
                 .addContainerGap(110, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -118,6 +118,10 @@ public class Simulacao extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // iniciar simulacao
+
+        Modulo y = f.getJogo().getDadosJogo().getModulo(1);
+        Modulo y1 = f.getJogo().getDadosJogo().getModulo(2);
+
         for (int i = 0; i < f.getJogo().getDadosJogo().getListaModulo().size(); i++) {
             int id_mod = f.getJogo().getDadosJogo().getListaModulo().get(i).id_modulo;
             Comando c = new ExecutaSimulacao(id_mod);

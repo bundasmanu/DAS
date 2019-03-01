@@ -40,6 +40,10 @@ public class Operador {
         this.id_operador=nextOperadorID;
         nextOperadorID++;
     }
+    
+    public Operador(int id){
+        this.id_operador=id;
+    }
 
     public List<Input> getInputs() {
         return inputs;
