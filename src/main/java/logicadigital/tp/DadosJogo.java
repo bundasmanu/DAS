@@ -22,6 +22,7 @@ public class DadosJogo {
     private FicheirosFabrica fich;
     private List<Modulo> m;
     private FicheiroBuilder ficheiro_builder;
+    static EstrategiaBotao_Importar eImportar;
 
     /*COLOCAR AQUI UM GESTOR DE COMANDOS*/
     GestorComandos com = null;
@@ -39,6 +40,23 @@ public class DadosJogo {
     public void setFich(FicheirosFabrica fich) {
         this.fich = fich;
     }
+
+    public static EstrategiaBotao_Importar geteImportar(String tipo_extensao) {
+        if(tipo_extensao.equals(".blif")){
+            return new ImportarFicheiroBlif();
+        }
+        else if(tipo_extensao.equals(".bin")){
+            return new ImportarFicheiroBin();
+        }
+        
+      return null;  
+    }
+
+    public void seteImportar(EstrategiaBotao_Importar eImportar) {
+        this.eImportar = eImportar;
+    }
+    
+    
 
     public FicheiroBuilder getFicheiro_builder() {
         return ficheiro_builder;

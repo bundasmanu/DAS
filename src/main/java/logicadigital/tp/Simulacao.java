@@ -6,6 +6,7 @@
 package logicadigital.tp;
 
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -207,13 +208,15 @@ public class Simulacao extends javax.swing.JFrame {
             // TODO add your handling code here:
             String nome_ficheiro_selecionado = jList1.getSelectedValue();
             //f.getJogo().getDadosJogo().getListaModulo().clear();
-            Ficheiro ficheiro = null;
-            if (nome_ficheiro_selecionado.contains(".blif")) {
-                ficheiro = FicheirosFabrica.getTipoFicheiros("BLIF", f.getJogo().getDadosJogo(), nome_ficheiro_selecionado);
-            } else if(nome_ficheiro_selecionado.contains(".bin")) {
-                ficheiro = FicheirosFabrica.getTipoFicheiros("BIN", f.getJogo().getDadosJogo(), nome_ficheiro_selecionado);
+            String [] a= nome_ficheiro_selecionado.split(" ");
+            String nome_ficheiro=Arrays.toString(a);
+            if(nome_ficheiro.contains(".blif")){
+                f.getJogo().getDadosJogo().geteImportar(".blif").importarFicheiro(f.getJogo().getDadosJogo(), nome_ficheiro_selecionado);
             }
-            ficheiro.LerFicheiro();
+            else if(nome_ficheiro.contains(".bin")){
+                f.getJogo().getDadosJogo().geteImportar(".bin").importarFicheiro(f.getJogo().getDadosJogo(), nome_ficheiro_selecionado);
+            }
+            
             int x=f.getJogo().getDadosJogo().getListaModulo().size();
             String modulol_info="";
             for (int i = 0; i < x; ++i) {
