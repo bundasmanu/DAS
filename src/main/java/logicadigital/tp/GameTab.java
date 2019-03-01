@@ -1057,7 +1057,7 @@ public class GameTab extends javax.swing.JFrame {
 
         }
         if (c instanceof LigaOperadorOutput) {
-
+            undoDesenhaEsquema2();
         }
     }//GEN-LAST:event_jButton12ActionPerformed
 
@@ -1114,6 +1114,7 @@ public class GameTab extends javax.swing.JFrame {
         int x = OperadoresAndOrAux2.size() - 1;
 
         contador2--;
+        conta1--;
         OperadoresAndOrAux2.remove(x);
         jButton3.setEnabled(true);
         DesenhaEsquema2();
