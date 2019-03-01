@@ -5,7 +5,16 @@
  */
 package logicadigital.tp;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import logicadigital.tp.Fachada;
+import logicadigital.tp.GameTab;
+import logicadigital.tp.IEstados;
+import logicadigital.tp.Inicio;
+import logicadigital.tp.MenuInicial;
+import logicadigital.tp.ModoGame;
 import static logicadigital.tp.LoginForm.getF;
 
 /**
@@ -133,7 +142,11 @@ public class RegisterForm extends javax.swing.JFrame {
         IEstados x=getF().getJogo().getEstado();
         if(x instanceof ModoGame){
             this.setVisible(false);
-            new GameTab(getF()).setVisible(true);
+            try {
+                new GameTab(getF()).setVisible(true);
+            } catch (IOException ex) {
+                Logger.getLogger(RegisterForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
             this.dispose();
         }
     }//GEN-LAST:event_jButtonRegisterActionPerformed

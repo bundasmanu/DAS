@@ -9,6 +9,53 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import logicadigital.tp.Fachada;
+import logicadigital.tp.FicheiroBuilder;
+import logicadigital.tp.GameTab;
+import logicadigital.tp.IEstados;
+import logicadigital.tp.Inicio;
+import logicadigital.tp.Input;
+import logicadigital.tp.MenuInicial;
+import logicadigital.tp.ModoGame;
+import logicadigital.tp.Modulo;
+import logicadigital.tp.*;
+import logicadigital.tp.Fachada;
+import logicadigital.tp.Fachada;
+import logicadigital.tp.Fachada;
+import logicadigital.tp.FicheiroBuilder;
+import logicadigital.tp.FicheiroBuilder;
+import logicadigital.tp.FicheiroBuilder;
+import logicadigital.tp.GameTab;
+import logicadigital.tp.GameTab;
+import logicadigital.tp.GameTab;
+import logicadigital.tp.IEstados;
+import logicadigital.tp.IEstados;
+import logicadigital.tp.IEstados;
+import logicadigital.tp.Inicio;
+import logicadigital.tp.Inicio;
+import logicadigital.tp.Inicio;
+import logicadigital.tp.Input;
+import logicadigital.tp.Input;
+import logicadigital.tp.Input;
+import logicadigital.tp.MenuInicial;
+import logicadigital.tp.MenuInicial;
+import logicadigital.tp.MenuInicial;
+import logicadigital.tp.ModoGame;
+import logicadigital.tp.ModoGame;
+import logicadigital.tp.ModoGame;
+import logicadigital.tp.Modulo;
+import logicadigital.tp.Modulo;
+import logicadigital.tp.Modulo;
+import logicadigital.tp.Opcao;
+import logicadigital.tp.Opcao;
+import logicadigital.tp.Operador;
+import logicadigital.tp.Operador;
+import logicadigital.tp.Operador;
+import logicadigital.tp.Operador;
+import logicadigital.tp.Output;
+import logicadigital.tp.Output;
+import logicadigital.tp.Output;
+import logicadigital.tp.Output;
 
 /**
  *
@@ -172,7 +219,11 @@ public class LoginForm extends javax.swing.JFrame {
         IEstados x=getF().getJogo().getEstado();
         if(x instanceof ModoGame){
             this.setVisible(false);
-            new GameTab(getF()).setVisible(true);
+            try {
+                new GameTab(getF()).setVisible(true);
+            } catch (IOException ex) {
+                Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
             this.dispose();
         }
         else{

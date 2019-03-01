@@ -79,10 +79,8 @@ public class BuilderBIN extends FicheiroBuilder{
             
             /*VERIFICAR SE EXISTEM TODOS OS INPUTS QUE SE PRETENDEM ADICIONAR NO MODULO*/
 
-            for(Input i : m.inputs){
-                this.listas_modulos.get(id_mod-1).getInputs().add(i);
-            }
-            
+            this.listas_modulos.get(id_mod-1).setInputs(x.getListaModulo().get(id_mod-1).getInputs());
+
             return this;
             
         }
@@ -110,9 +108,7 @@ public class BuilderBIN extends FicheiroBuilder{
             
             /*VERIFICAR SE EXISTEM TODOS OS INPUTS QUE SE PRETENDEM ADICIONAR NO MODULO*/
 
-            for(Output out : m.getOutputs()){
-                this.listas_modulos.get(id_mod-1).getOutputs().add(out);
-            }
+            this.listas_modulos.get(id_mod-1).setOutputs(x.getListaModulo().get(id_mod-1).getOutputs());
             
             return this;
             
@@ -141,9 +137,7 @@ public class BuilderBIN extends FicheiroBuilder{
             
             /*VERIFICAR SE EXISTEM TODOS OS INPUTS QUE SE PRETENDEM ADICIONAR NO MODULO*/
 
-                for(Operador op : m.getOperador()){
-                this.listas_modulos.get(id_mod-1).getOperador().add(op);
-            }
+            this.listas_modulos.get(id_mod-1).setOperador(x.getListaModulo().get(id_mod-1).getOperador());
             
             return this;
             

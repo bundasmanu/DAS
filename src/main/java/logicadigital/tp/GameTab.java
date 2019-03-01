@@ -28,6 +28,8 @@ public class GameTab extends javax.swing.JFrame {
      * Creates new form GameTab
      */
     static Fachada f;
+    static FicheiroBuilder fich_builder_blif;
+    static FicheiroBuilder fich_builder_bin;
     ArrayList<Input> in = new ArrayList<Input>();
     ArrayList<Operador> operador = new ArrayList<Operador>();
     ArrayList<Operador> and = new ArrayList<Operador>();
@@ -57,9 +59,10 @@ public class GameTab extends javax.swing.JFrame {
     static int idinputReceber = 0;
     static int idoutputreceber = 0;
 
-    public GameTab(Fachada ff) {
+    public GameTab(Fachada ff) throws IOException {
         initComponents();
         f = ff;
+        builders();
         jLabel5.setFont(new Font("Serif", Font.PLAIN, 30));
     }
 
@@ -74,8 +77,8 @@ public class GameTab extends javax.swing.JFrame {
     public static int criaModulo() throws IOException {
 
         int id_modulo = getF().getJogo().criaModulo();/*QUANDO CRIO UM MODULO, OBTENHO O SEU ID*/
-
-
+        fich_builder_blif.setModulo(f.getJogo().getDadosJogo(), id_modulo);
+        fich_builder_bin.setModulo(f.getJogo().getDadosJogo(), id_modulo);
         return id_modulo;
 
     }
@@ -708,7 +711,7 @@ public class GameTab extends javax.swing.JFrame {
     }
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
+        
         String input = jTextField1.getText();
         String operadorAnd = jTextField2.getText();
         String operadoOr = jTextField3.getText();
@@ -742,15 +745,22 @@ public class GameTab extends javax.swing.JFrame {
         for (int i = 0; i < numInput; i++) {
             criaEntradas(id_mod, 0);
         }
+        fich_builder_blif.setInputs(f.getJogo().getDadosJogo(), id_mod);
+        fich_builder_bin.setInputs(f.getJogo().getDadosJogo(), id_mod);
+        
         for (int i = 0; i < numOperadorAnd; i++) {
             criaOperadoresAnd(id_mod);
         }
         for (int i = 0; i < numOperadorOr; i++) {
             criaOperadoresOr(id_mod);
         }
+        fich_builder_blif.setOperadores(f.getJogo().getDadosJogo(), id_mod);
+        fich_builder_bin.setOperadores(f.getJogo().getDadosJogo(), id_mod);
         for (int i = 0; i < numOutput; i++) {
             criaSaidas(id_mod);
         }
+        fich_builder_blif.setOutputs(f.getJogo().getDadosJogo(), id_mod);
+        fich_builder_bin.setOutputs(f.getJogo().getDadosJogo(), id_mod);
 
         //clonar a os dados do modulo para ArrayList em memoria
         for (int i = 0; i < getF().getJogo().getDadosJogo().getModulo(id_mod).getInputs().size(); i++) {
@@ -981,7 +991,11 @@ public class GameTab extends javax.swing.JFrame {
         outAux.clear();
         Bin.clear();
         this.setVisible(false);
-        new GameTab(getF()).setVisible(true);
+        try {
+            new GameTab(getF()).setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(GameTab.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
@@ -1228,6 +1242,11 @@ public class GameTab extends javax.swing.JFrame {
         jTextField7.setText(auxOperadores);
 
     }
+    
+    public static void builders() throws IOException{
+        fich_builder_blif=f.getJogo().getDadosJogo().getFicheiro_builder().getFicheiroBuilder("BuilderBLIF");
+        fich_builder_bin=f.getJogo().getDadosJogo().getFicheiro_builder().getFicheiroBuilder("BuilderBIN");
+    }
 
     /**
      * @param args the command line arguments
@@ -1268,7 +1287,11 @@ public class GameTab extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GameTab(f).setVisible(true);
+                try {                
+                    new GameTab(f).setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(GameTab.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
