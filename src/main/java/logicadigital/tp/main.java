@@ -72,6 +72,7 @@ public class main {
         
         //f.ImportaFicheiro();
         //f.ExportaFicheiro();
+       
         MenuInicial m= new MenuInicial();   
         m.setVisible(true);
         

@@ -409,7 +409,7 @@ public class GameTab extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton12)
-                        .addGap(166, 166, 166)
+                        .addGap(179, 179, 179)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -945,7 +945,7 @@ public class GameTab extends javax.swing.JFrame {
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        new ExperimentarFilesUtil().setVisible(true);
+        new ExperimentarFilesUtil(f).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton12ActionPerformed
 

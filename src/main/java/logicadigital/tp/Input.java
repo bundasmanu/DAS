@@ -5,6 +5,7 @@
  */
 package logicadigital.tp;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
  *
  * @author Armando
  */
-public class Input {
+public class Input implements Serializable{
 
     int id_input;
     private static int nextInputID = 1;

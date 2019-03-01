@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import logicadigital.tp.Session;
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -25,8 +25,9 @@ public class ExperimentarFilesUtil extends javax.swing.JFrame {
      */
     
     List<String> nomes_ficheiros=new ArrayList<String>();
-    
-    public ExperimentarFilesUtil() {
+    static Fachada fachada;
+    public ExperimentarFilesUtil(Fachada f) {
+        fachada=f;
         initComponents();
     }
 
@@ -42,6 +43,8 @@ public class ExperimentarFilesUtil extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
         jButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -62,6 +65,10 @@ public class ExperimentarFilesUtil extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
 
         jMenu1.setText("Sair");
         jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -93,20 +100,24 @@ public class ExperimentarFilesUtil extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(86, 86, 86)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(160, 160, 160)
                         .addComponent(jButton1)))
-                .addContainerGap(98, Short.MAX_VALUE))
+                .addContainerGap(95, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(48, 48, 48)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(105, Short.MAX_VALUE))
         );
 
         pack();
@@ -115,17 +126,16 @@ public class ExperimentarFilesUtil extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         try {
             // TODO add your handling code here:
-        nomes_ficheiros=Session.getFicheiroOperacaoCRUD().getNomesFicheirosPessoa("joao");
+        nomes_ficheiros=Fachada.getFicheiroOperacaoCRUD().getNomesFicheirosPessoa("joao");
         
         String[] strarray = new String[nomes_ficheiros.size()];
         nomes_ficheiros.toArray(strarray);
         
         jList1.setListData(strarray);
         
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ExperimentarFilesUtil.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(ExperimentarFilesUtil.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            System.out.println(""+ex.getMessage());
+            return;
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
@@ -137,6 +147,21 @@ public class ExperimentarFilesUtil extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         String nome_ficheiro_seleccionaod=jList1.getSelectedValue(); 
+        fachada.getJogo().getDadosJogo().getListaModulo().clear();
+        Ficheiro ficheiro;
+        if(nome_ficheiro_seleccionaod.contains(".blif")){
+            ficheiro= FicheirosFabrica.getTipoFicheiros("BLIF", fachada.getJogo().getDadosJogo(), nome_ficheiro_seleccionaod);
+
+        }
+        else{
+            ficheiro= FicheirosFabrica.getTipoFicheiros("BIN", fachada.getJogo().getDadosJogo(), nome_ficheiro_seleccionaod);
+        }
+        ficheiro.LerFicheiro();
+       int x=fachada.getJogo().getDadosJogo().getListaModulo().size();
+       for(int i=0;i<x;++i){
+        String modulol_info=fachada.getJogo().getDadosJogo().getListaModulo().get(i).toString();
+        jTextArea1.append(modulol_info);
+       }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -169,7 +194,7 @@ public class ExperimentarFilesUtil extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ExperimentarFilesUtil().setVisible(true);
+                new ExperimentarFilesUtil(fachada).setVisible(true);
             }
         });
     }
@@ -181,6 +206,8 @@ public class ExperimentarFilesUtil extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }

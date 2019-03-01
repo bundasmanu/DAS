@@ -48,7 +48,7 @@ public class AdaptadorBIN extends Ficheiro {
     @Override
     public boolean LerFicheiro() {
        try{
-           return ficheiroBIN.ReadBinaryFile(d, name_ficheiro);
+           return ficheiroBIN.ReadBinaryFile(dj, name_ficheiro);
        } catch(Exception e){
            System.out.println(""+e.getMessage());
            return false;

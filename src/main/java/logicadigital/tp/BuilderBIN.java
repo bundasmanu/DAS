@@ -7,8 +7,11 @@ package logicadigital.tp;
 
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
+import java.sql.Date;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -157,9 +160,25 @@ public class BuilderBIN extends FicheiroBuilder{
         
         if(this.listas_modulos.isEmpty()==false){
             /*ESCREVE PARA O FICHEIRO*/
-            FileOutputStream fos = new FileOutputStream("historico_" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS") +".bin"); /*FALTA METER O NOME DO UTILIZADOR*/
+           
+            
+            Calendar cal = Calendar.getInstance();
+            java.util.Date date=cal.getTime();
+            String patern="MM//dd/yyyyHH:mm:ss";
+            DateFormat df= new SimpleDateFormat();
+            String todayAsString=df.format(date);
+            String[] aux=todayAsString.split(" ");
+            System.out.println(""+date);
+           
+           
+           
+           String nome_ficheiro="historico_"+aux[0]+aux[1]+".bin";
+            FileOutputStream fos = new FileOutputStream(nome_ficheiro); /*FALTA METER O NOME DO UTILIZADOR*/
             ObjectOutputStream ois = new ObjectOutputStream(fos);
             ois.writeObject(this.listas_modulos);
+            boolean verifica_inserao_ficheiro_bd=Fachada.getFicheiroOperacaoCRUD().insereFicheiro("joao",nome_ficheiro);
+            System.out.println(""+verifica_inserao_ficheiro_bd);
+            return this;
         }
         throw new Exception("Nao pode construir o ficheiro");
     }

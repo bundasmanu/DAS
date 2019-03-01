@@ -26,7 +26,7 @@ public class Registo extends EstadoAdapter{
             /*VERIFICAR SE ESTA TUDO EM ORDEM
             /*SE ESTIVER --> INSERE NA BD, E PASSA PARA O ESTADO MODOGAME*/
             /*SENAO ESTIVER PASSAR PARA O ESTADO ANTERIOR INICIO*/
-            boolean retorno=Session.getUtilizdorOperacaoCRUD().InsertUtilizador(n, p);
+            boolean retorno=Fachada.getUtilizdorOperacaoCRUD().InsertUtilizador(n, p);
             if(retorno==true){
                 return new ModoGame(super.getDadosJogo());
             }

@@ -31,7 +31,7 @@ public class Login extends EstadoAdapter {
  /*SENAO EXISTIR VOLTA AO INICIO*/
         try {
 
-            boolean retorno=Session.getUtilizdorOperacaoCRUD().VerificaLogin(n, p);
+            boolean retorno=Fachada.getUtilizdorOperacaoCRUD().VerificaLogin(n, p);
             
             if(retorno==true){ /*Apenas se estiver tudo bem*/
                 Utilizador utilizador= new Utilizador(n, p);

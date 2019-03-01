@@ -5,6 +5,7 @@
  */
 package logicadigital.tp;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import static logicadigital.tp.Opcao.AND;
@@ -20,7 +21,7 @@ enum Opcao
     AND, OR, XOR, NOR; 
 }
 
-public class Operador {
+public class Operador implements Serializable{
     
     int id_operador;
     private static int nextOperadorID = 1;
@@ -31,6 +32,10 @@ public class Operador {
     List<Output> outputs;
     
     private Opcao qual;/*DEFINE SE É UM AND, OR , ETC*/
+    
+    public Operador(){
+        
+    }
     
     public Operador(Opcao op){
         this.inputs=new ArrayList<Input>();
@@ -43,6 +48,9 @@ public class Operador {
     
     public Operador(int id){
         this.id_operador=id;
+        this.inputs=new ArrayList<Input>();
+        this.operadores=new ArrayList<Operador>();
+        this.outputs=new ArrayList<Output>();
     }
 
     public List<Input> getInputs() {
@@ -213,7 +221,7 @@ public class Operador {
 
         String info_operador="";
         
-        info_operador+="Operador: "+this.getQual()+"\n";
+            info_operador+="Operador: "+this.getId_operador()+"\n";
         
         return info_operador;
     }

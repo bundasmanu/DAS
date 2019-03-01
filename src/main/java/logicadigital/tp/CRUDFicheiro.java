@@ -25,7 +25,7 @@ public class CRUDFicheiro {
     private Connection con;
     
     public CRUDFicheiro() throws ClassNotFoundException, SQLException{
-        con=Session.getConnection();
+        con=Fachada.getConnection();
     }
     
     public boolean insereFicheiro(String nomePessoa, String nomeFicheiro){
@@ -33,7 +33,7 @@ public class CRUDFicheiro {
         try{
             
             /**/
-            int valor_operador=Session.getUtilizdorOperacaoCRUD().getIDUtilizador(nomePessoa);
+            int valor_operador=Fachada.getUtilizdorOperacaoCRUD().getIDUtilizador(nomePessoa);
             if(valor_operador!=-1){
                 
                 PreparedStatement statement = con.prepareStatement("insert into ficheiros (nome_ficheiro,data_ficheiro,id_pessoa) values(?,?,?)");
@@ -64,7 +64,7 @@ public class CRUDFicheiro {
         try{
             
             /*OBTENCAO DO ID DAQUELA PESSOA*/
-            int valor_operador=Session.getUtilizdorOperacaoCRUD().getIDUtilizador(nomePessoa);
+            int valor_operador=Fachada.getUtilizdorOperacaoCRUD().getIDUtilizador(nomePessoa);
             if(valor_operador!=-1){
             
                 PreparedStatement statement = con.prepareStatement("select nome_ficheiro from ficheiros where id_pessoa=?"); 

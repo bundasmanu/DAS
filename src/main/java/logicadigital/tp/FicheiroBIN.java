@@ -56,15 +56,16 @@ public class FicheiroBIN {
             ObjectInputStream reader = new ObjectInputStream(ficheiro);
             
             List<Modulo> lista_modulos = null;
-            Object x;
-            x = (Object) reader.readObject();
+            List<Modulo> x;
+            x = (List<Modulo>) reader.readObject();
             lista_modulos = (List<Modulo>) x;
             for (int i = 0; i < lista_modulos.size(); i++) {
                 System.out.println("O objeto foi lido do ficheiro de nome" + lista_modulos.get(i).toString());
             }
 
             reader.close();
-
+            d.getListaModulo().clear();
+            d.setListaModulo(x);
             return true;
 
         } catch (Exception ex) {

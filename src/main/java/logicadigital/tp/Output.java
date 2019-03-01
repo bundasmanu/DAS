@@ -5,15 +5,19 @@
  */
 package logicadigital.tp;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Armando
  */
-public class Output {
+public class Output implements Serializable{
 
     int id_input;
     private static int nextInputID = 1;
     private int binario;
+    
+   
 
     public Output(int bin) {/*CONSTRUTOR CRIADO PARA EFETUAR A VERIFICACAO NOS TESTES*/
         this.binario = bin;

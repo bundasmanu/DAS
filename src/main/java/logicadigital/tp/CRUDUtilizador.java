@@ -23,7 +23,7 @@ public class CRUDUtilizador {
     private Connection conexao;
 
     public CRUDUtilizador() throws ClassNotFoundException, SQLException {
-        this.conexao = Session.getConnection();/*OBTENCAO DA REFERENCIA DO OBJETO*/
+        this.conexao = Fachada.getConnection();/*OBTENCAO DA REFERENCIA DO OBJETO*/
     }
 
     public boolean InsertUtilizador(String nome, String passwords) throws SQLException {

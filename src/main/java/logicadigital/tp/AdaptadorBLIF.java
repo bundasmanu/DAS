@@ -47,7 +47,7 @@ public class AdaptadorBLIF extends Ficheiro{
     @Override
     public boolean LerFicheiro() {
         try {
-            return ficheiro.LerFicheiroBlif(d, name_ficheiro);
+            return ficheiro.LerFicheiroBlif(dj,name_ficheiro);
         } catch (Exception ex) {
             System.out.println(""+ex.getMessage());
           return false;

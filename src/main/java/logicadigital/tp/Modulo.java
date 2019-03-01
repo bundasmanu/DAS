@@ -5,6 +5,7 @@
  */
 package logicadigital.tp;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -12,7 +13,7 @@ import java.util.ArrayList;
  *
  * @author Armando
  */
-public class Modulo {
+public class Modulo implements Serializable{
     
     int id_modulo;
     private static int nextModuloID = 1;
@@ -20,6 +21,7 @@ public class Modulo {
     List<Output> outputs;
     List<Operador> operador;
     
+ 
     public Modulo(){
         this.id_modulo=nextModuloID;
         nextModuloID++;

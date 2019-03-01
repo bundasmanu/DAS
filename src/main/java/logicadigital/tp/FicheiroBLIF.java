@@ -65,14 +65,20 @@ public class FicheiroBLIF {
 
     public boolean leComandoInput(int id_modulo, List<Integer> lista_inputs) {
         try {
-
-            Modulo m = this.lista_modulos.get(id_modulo);
+            
+            Modulo m=null;
+            for(Modulo x : this.lista_modulos){
+                if(x.getId_modulo()==id_modulo){
+                    m=x;
+                }
+            }
+ 
             if (m == null) {
                 return false;
             }
             for (int i = 0; i < lista_inputs.size(); i++) {
                 Input x = new Input();
-                x.setId_input(i);
+                x.setId_input(lista_inputs.get(i));
                 m.getInputs().add(x);
             }
             return true;
@@ -86,13 +92,19 @@ public class FicheiroBLIF {
     public boolean LeComandoOutput(int id_modulo, List<Integer> lista_outputs) {
         try {
 
-            Modulo m = this.lista_modulos.get(id_modulo);
+            Modulo m=null;
+            for(Modulo x : this.lista_modulos){
+                if(x.getId_modulo()==id_modulo){
+                    m=x;
+                }
+            }
+            
             if (m == null) {
                 return false;
             }
             for (int i = 0; i < lista_outputs.size(); i++) {
                 Output x = new Output();
-                x.setId_input(id_modulo);
+                x.setId_input(lista_outputs.get(i));
                 m.getOutputs().add(x);
             }
             return true;
@@ -104,7 +116,14 @@ public class FicheiroBLIF {
     }
 
     public boolean LeNamesInputOperador(int id_modulo, List<Integer> lista_inputs, int id_operador, List<Integer> lista_binarios, int valor_bin_operador) {
-        Modulo m = this.lista_modulos.get(id_modulo);
+        
+        Modulo m=null;
+            for(Modulo x : this.lista_modulos){
+                if(x.getId_modulo()==id_modulo){
+                    m=x;
+                }
+        }
+        
         if (m == null) {
             return false;
         }
@@ -112,11 +131,11 @@ public class FicheiroBLIF {
         m.getOperador().add(x);
 
         for (int i = 0; i < m.inputs.size(); i++) {
-            for (int j = 0; j < lista_inputs.size(); i++) {
+            for (int j = 0; j < lista_inputs.size(); j++) {
                 if (m.inputs.get(i).id_input == lista_inputs.get(j)) {
-                    x.getInputs().add(m.getInputs().get(i));
-                    for (int h = 0; h < lista_binarios.size(); i++) {
-                        m.getInputs().get(j).setBinario(lista_binarios.get(h));
+                    x.getInputs().add(m.getInputs().get(j));
+                    for (int h = 0; h < lista_binarios.size(); h++) {
+                        m.getInputs().get(i).setBinario(lista_binarios.get(h));
                     }
 
                 }
@@ -126,7 +145,14 @@ public class FicheiroBLIF {
     }
     
     public boolean leNamesOutputOperador(int id_modulo,List<Integer> lista_operadores, int binario,int output) {
-        Modulo m= this.lista_modulos.get(id_modulo);
+        
+        Modulo m=null;
+            for(Modulo x : this.lista_modulos){
+                if(x.getId_modulo()==id_modulo){
+                    m=x;
+                }
+        }
+        
         if(m==null){
             return false;
         }
@@ -202,16 +228,17 @@ public class FicheiroBLIF {
                 int operador = 0;
                 FileReader fileReader = new FileReader(f);
                 BufferedReader bufferedReader = new BufferedReader(fileReader);
-
+                String last="";
                 while ((linha = bufferedReader.readLine()) != null) {
-                    String last = linha.substring(linha.lastIndexOf(" ") + linha.length() - 1);
-
-                    System.out.println(linha);
+                    
+                    
+                    //System.out.println(linha);
                     if (linha.startsWith(".model")) {
+                        last = linha.substring(7);
                         boolean status = leComandoModel(Integer.parseInt(last));
                         System.out.println("" + status);
                     } else if (linha.contains(".inputs")) {
-                        String ultimo = linha.substring(linha.lastIndexOf(" ") + linha.lastIndexOf(linha.length()));
+                        String ultimo = linha.substring(8);
                         String[] a = ultimo.split(" ");
 
                         for (int i = 0; i < a.length; i++) {
@@ -219,7 +246,7 @@ public class FicheiroBLIF {
                         }
                         leComandoInput(Integer.parseInt(last), lista_int);
                     } else if (linha.contains(".outputs")) {
-                        String ultimo = linha.substring(linha.lastIndexOf(" ") + linha.lastIndexOf(linha.length()));
+                        String ultimo = linha.substring(9);
                         String[] a = ultimo.split(" ");
 
                         for (int i = 0; i < a.length; i++) {
@@ -229,31 +256,39 @@ public class FicheiroBLIF {
                         num_names=VerificaQuantosNames(name);
                     } else if (linha.contains(".names") && flag_controlo == 0) {
                         for (int i = 0; i < num_names - lista_outputs.size(); i++) {
-                            String l = linha.substring(linha.lastIndexOf(" ") + linha.length());
+                            String l = linha.substring(7);
                             String[] s = l.split(" ");
+                            lista_names_inputs.clear();
+                            lista_binarios.clear();
                             for (int j = 0; j < s.length - 1; j++) {
                                 lista_names_inputs.add(Integer.parseInt(s[j]));
                             }
 
-                            String b = s[s.length];
+                            String b = s[(s.length)-1];
                             operador = Integer.parseInt(b);
                             String next;
                             next = bufferedReader.readLine();
+                            String[] numero=next.split(" ");
                             System.out.println("Linha atual: " + linha);
                             System.out.println("Linha seguinte: " + next);
                             int valor = 0;
                             for (int j = 0; j < lista_names_inputs.size(); j++) {
-                                valor = Character.getNumericValue(next.charAt(j));
+                                valor = Integer.parseInt(numero[j]);
                                 lista_binarios.add(valor);
                             }
-                            LeNamesInputOperador(Integer.parseInt(last), lista_int, operador, lista_binarios, valor);
-                            bufferedReader.readLine();
+                            LeNamesInputOperador(Integer.parseInt(last), lista_names_inputs, operador, lista_binarios, valor);
+                            if(i==0){
+                                 linha=bufferedReader.readLine();
+                            }
+                           
                         }
                         flag_controlo = 2;
+                        //linha=bufferedReader.readLine();
                     } else if (linha.contains(".names") && flag_controlo == 1) {
                         int x = linha.trim().split("\\s+").length;
-                        String ultimo = linha.substring(linha.lastIndexOf(" ") + linha.lastIndexOf(linha.length()));
+                        String ultimo = linha.substring(7);
                         String[] a = ultimo.split(" ");
+                        lista_binarios.clear();
                         for (int j = 0; j < a.length - 1; j++) {
                             if (x == 4) {
                                 for (int h = 0; h < a.length - 1; h++) {
@@ -268,20 +303,22 @@ public class FicheiroBLIF {
                         flag_controlo = 2;
                     } else if (linha.contains(".names") && flag_controlo == 2) {
                         int ultimo_output=0;
+                        lista_binarios.clear();
+                        lista_operadores.clear();
                         for (int i = 0; i < lista_outputs.size(); i++) {
                             ultimo_output=0;
-                            String l = linha.substring(linha.lastIndexOf(" ") + linha.length());
+                            String l = linha.substring(7);
                             String[] s = l.split(" ");
                             for (int j = 0; j < s.length - 1; j++) {
                                 lista_operadores.add(Integer.parseInt(s[j]));
                             }
 
-                            String b = s[s.length];
+                            String b = s[s.length-1];
                             operador = Integer.parseInt(b);
                             String next;
                             next = bufferedReader.readLine();
                             String[] sp = next.split(" ");
-                            ultimo_output = Integer.parseInt(sp[sp.length]);
+                            ultimo_output = Integer.parseInt(sp[(sp.length)-1]);
                             System.out.println("Linha atual: " + linha);
                             System.out.println("Linha seguinte: " + next);
                             int valor = 0;
@@ -289,15 +326,20 @@ public class FicheiroBLIF {
                                 valor = Character.getNumericValue(next.charAt(j));
                                 lista_binarios.add(valor);
                             }
+                            
+                            leNamesOutputOperador(Integer.parseInt(last), lista_operadores, ultimo_output, operador);
+                            if(i==0){
+                                linha=bufferedReader.readLine();
+                            }
+                            
                         }
-                        leNamesOutputOperador(Integer.parseInt(last), lista_operadores, ultimo_output, operador);
-                        bufferedReader.readLine();
 
                     }
 
-                    bufferedReader.close();
-
                 }
+                bufferedReader.close();
+                d.getListaModulo().clear();
+                d.setListaModulo(this.lista_modulos);
             }
         } catch (Exception e) {
             System.out.println("" + e.getMessage());

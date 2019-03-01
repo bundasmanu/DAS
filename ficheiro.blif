@@ -2,10 +2,8 @@
 .inputs 1 2 3
 .outputs 1 2
 .names 1 2 1
-11 1
+1 1 1
 .names 2 3 2
-11 1
-.names 1 2 3
 1 1 1
 .names 1 1
 1 1
